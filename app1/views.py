@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .camera import capture
+from .camera import capture, analysis
 
 
 def index(request):
@@ -7,6 +7,8 @@ def index(request):
 
 
 def photo(request):
-    photo = capture.takePhoto()
-    print(photo)
+    capture.takePhoto()
+    data = analysis.GetTempPhoto()
+    temp = analysis.Photo(data)
+    temp.PrintPhoto()
     return render(request, 'index.html')

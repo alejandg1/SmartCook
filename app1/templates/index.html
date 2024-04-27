@@ -1,11 +1,5 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Página con cámara</title>
-</head>
-<body>
+{% extends "components/base.html" %}
+{% block content %}
     <h1>Página con cámara</h1>
     <a href="{% url 'photo' %}" >tomar foto</a>
-</body>
-</html>
+{% endblock %}

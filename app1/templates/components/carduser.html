@@ -1,11 +1,17 @@
+{% load static %}
 <card>
-    <div class="card shadow">
-        <div class="card-header">
-            <h2>Username</h2>
-        </div>
-        <div class="card-body">
-            <p3>email: example@gmail.com</p3>
-            <p3>password: *******</p3>
-        </div>
+  <div class="card shadow">
+    <div class="card-header">
+      <h2>Username</h2>
     </div>
+    <div class="card-body">
+      <div>
+        <img src="{% static 'media/icons/user.png' %}" />
+      </div>
+      <div>
+        <p3>email: example@gmail.com</p3>
+        <p3>password: *******</p3>
+      </div>
+    </div>
+  </div>
 </card>

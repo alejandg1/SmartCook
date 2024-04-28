@@ -1,0 +1,36 @@
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  background-color: #8BB88B;
+  padding: 10px;
+}
+
+.bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.bar ul li {
+  margin-right: 10px;
+}
+
+.bar ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.bar ul li a:hover {
+  color: #ffff;
+}
+
+nav{
+  height: 5vh;
+}
+
+footer{
+  height: 5vh;
+}

@@ -1,19 +1,18 @@
-
-<section class="form-group">
-    <navbar>
-        <a>SmartCook</a>        
-        <div classname="separador">
-        </div>
-        <ul>
-            <li>
-                <a href="{% url 'index' %}">Inicio</a>
-            </li>
-            <li>
-                <a href="{% url 'index' %}">Cocinar</a>
-            </li>
-            <li>
-                <a href="{% url 'index' %}">Historial</a>
-            </li>
-        </ul>
-    </navbar> 
-</section>
+<nav class="bar">
+  <div classname="separador">
+    <p>SmartCook</p>
+  </div>
+  <div>
+    <ul>
+      <li>
+        <a href="{% url 'index' %}">Inicio</a>
+      </li>
+      <li>
+        <a href="{% url 'perfil' %}">perfil</a>
+      </li>
+      <li>
+        <a href="{% url 'historial' %}">Historial</a>
+      </li>
+    </ul>
+  </div>
+</nav>

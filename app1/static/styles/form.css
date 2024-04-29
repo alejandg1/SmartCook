@@ -1,0 +1,42 @@
+/* Estilo general del formulario */
+form {
+  width: 500px; /* Ajusta el ancho del formulario */
+  margin: 0 auto; /* Centra el formulario en la página */
+  padding: 20px; /* Agrega espacio alrededor del contenido del formulario */
+  border: 1px solid #ccc; /* Agrega un borde alrededor del formulario */
+  border-radius: 5px; /* Redondea las esquinas del formulario */
+}
+
+/* Estilo para las etiquetas de los inputs */
+label {
+  display: block; /* Muestra las etiquetas en la misma línea que los inputs */
+  margin-bottom: 5px; /* Agrega espacio entre las etiquetas y los inputs */
+  font-weight: bold; /* Hace que las etiquetas sean más gruesas */
+}
+
+/* Estilo para los inputs de tipo texto */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 10px; /* Agrega espacio dentro de los inputs */
+  border: 1px solid #ccc; /* Agrega un borde a los inputs */
+  border-radius: 3px; /* Redondea las esquinas de los inputs */
+  box-sizing: border-box; /* Incluye el borde en el ancho del input */
+}
+
+/* Estilo para el botón de envío */
+button[type="submit"] {
+  background-color: #4CAF50; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  padding: 10px 20px; /* Agrega espacio dentro del botón */
+  border: none; /* Elimina el borde del botón */
+  border-radius: 3px; /* Redondea las esquinas del botón */
+  cursor: pointer; /* Cambia el cursor a mano al pasar el mouse sobre el botón */
+}
+
+/* Estilo para los mensajes de error (opcional) */
+.error {
+  color: red; /* Color del mensaje de error */
+  font-size: 12px; /* Tamaño del mensaje de error */
+}

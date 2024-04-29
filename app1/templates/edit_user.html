@@ -16,7 +16,11 @@
                 <input type="password" name="password" value="default passw">
             </label>
             <button type="button">guardar</button>
-            <button href="{% url 'perfil' %}" type="button">cancelar</button>
+            <button type="button">
+              <a href="{% url 'perfil' %}" >
+                cancelar
+              </a>
+            </button>
         </form>
     </div>
 {% endblock %}

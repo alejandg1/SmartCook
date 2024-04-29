@@ -16,7 +16,11 @@
                 <input type="password" name="password">
             </label>
             <button type="button">continuar</button>
-            <button href="{% url 'index' %}" type="button">cancelar</button>
+            <button  type="button">
+              <a href="{% url 'index' %}" >
+                cancelar
+              </a>
+              </button>
         </form>
     </div>
 {% endblock %}

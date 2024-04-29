@@ -1,8 +1,8 @@
 # import tensorflow as tf
-import cv2
-import numpy as np
-# import keras
-from app1 import constanst 
+# import cv2
+# import numpy as np
+# # import keras
+# from app1 import constanst
 # from keras.applications.resnet50 import preprocess_input, decode_predictions, ResNet50
 
 # def GetTempPhoto():

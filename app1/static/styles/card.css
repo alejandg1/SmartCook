@@ -3,15 +3,33 @@
   height: 354px;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   justify-content: space-evenly;
   background: white;
   border-radius: 10px;
 }
 
-.card div{
-  height: 50%;
+.card .card-header{
+  height: 20%;
 }
+
+.card .card-body{
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  row-gap: normal;
+  column-gap: normal;
+  height:72%;
+  align-items: center
+}
+
+.card .card-body .button{
+  margin-top: 60px;
+  display: grid;
+  justify-content: right;
+}
+
+
 
 .shadow {
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(190, 190, 190),

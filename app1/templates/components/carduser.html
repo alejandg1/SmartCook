@@ -9,8 +9,13 @@
         <img src="{% static 'media/icons/user.png' %}" />
       </div>
       <div>
-        <p3>email: example@gmail.com</p3>
-        <p3>password: *******</p3>
+        <p>email: example@gmail.com</p>
+        <p>password: *******</p>
+        <div class="button">
+          <button>
+            <a href="{% url 'edit_user' %}">Editar</a>
+          </button>
+        </div>
       </div>
     </div>
   </div>

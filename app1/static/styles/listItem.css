@@ -1,0 +1,50 @@
+.historial{
+    width: 40%;
+    height: 90%;
+    padding: 9px;
+    background-color: #ffff;
+    border-radius: 20px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.6em;
+}
+
+list{
+    width: 50em;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.list{
+    width: 20em;
+    height: 3em;
+    border-radius: 20px;
+    background-color: cornsilk;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    row-gap: 0.5em;
+}
+
+.list .icon{
+    width: 2em;
+    height: 2em;
+}
+
+.list .title{
+    font-size: 1.2em;
+    margin: 0.5em;
+}
+
+.list .accion{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}

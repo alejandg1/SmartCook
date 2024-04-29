@@ -21,7 +21,7 @@ def busqueda(request):
     return render(request, 'busqueda.html')
     
 def receta(request):
-    return render(request, 'receta.html')
+    return render(request, 'components/recetamodal.html')
     
 def edit_user(request):
     return render(request, 'edit_user.html')

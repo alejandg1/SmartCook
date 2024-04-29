@@ -28,9 +28,20 @@
     rel="stylesheet"
     href="{% static 'styles/listItem.css' %}"
   />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/form.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/modal.css' %}"
+  />
   <body>
     {% include "components/navbar.html" %}
     <content> {% block content %} {% endblock %} </content>
     {% include "components/footer.html" %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/modal.js' %}">
+    </script>
   </body>
 </html>

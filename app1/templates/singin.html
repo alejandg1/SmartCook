@@ -1,8 +1,19 @@
 {% extends "components/base.html" %}
+{% load static %}
+{% block Ustyles %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/form.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/card.css' %}"
+  />
+{% endblock %}
 {% block content %}
     <div>
         <h1>crear Usuario</h1>
-        <form action="" method="POST">
+        <form class="shadow" action="" method="POST">
             <label for="name">
                 Nombre:
                 <input type="text" name="name">

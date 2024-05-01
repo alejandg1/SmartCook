@@ -1,8 +1,20 @@
 {% extends "components/base.html" %}
+{% load static %}
+{% block Ustyles %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/form.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/card.css' %}"
+  />
+{% endblock %}
+
 {% block content %}
     <div>
         <h1>Iniciar Sesión</h1>
-        <form action="/edit_user" method="POST">
+        <form class = "shadow"action="/edit_user" method="POST">
             <label for="email">
                 Email:
                 <input type="email" name="email">

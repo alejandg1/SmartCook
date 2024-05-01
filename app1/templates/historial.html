@@ -1,4 +1,17 @@
-{% extends "components/base.html" %} {% block content %}
+{% extends "components/base.html" %} 
+{% load static %}
+
+{% block Ustyles %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/listItem.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/modal.css' %}"
+  />
+{% endblock %}
+{% block content %}
   <div class="historial shadow">
     <h2>Historial</h2>
     {% include "components/list_item.html" with nombre="item1" id=1 %} 
@@ -7,4 +20,10 @@
   </div>
   <div class="modalcont"></div>
 
+{% endblock %}
+
+
+{% block Uscripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}

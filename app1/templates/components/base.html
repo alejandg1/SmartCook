@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
   {% load static %}
+  <head> 
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta http-equiv="Expires" content="0" />
@@ -20,28 +20,22 @@
     rel="stylesheet"
     href="{% static 'styles/button.css' %}"
   />
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/card.css' %}"
-  />
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/listItem.css' %}"
-  />
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/form.css' %}"
-  />
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/modal.css' %}"
-  />
+
+  {% block Ustyles  %}
+  {% endblock  %}
+
+  </head>
   <body>
+
     {% include "components/navbar.html" %}
-    <content> {% block content %} {% endblock %} </content>
+    <content> 
+      {% block content %} 
+      {% endblock %} 
+    </content>
     {% include "components/footer.html" %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/modal.js' %}">
-    </script>
+
+  {% block Uscripts %}
+  {% endblock %}
+
   </body>
 </html>

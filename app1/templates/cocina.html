@@ -1,11 +1,15 @@
 {% extends "components/base.html" %}
+
+{% load static %}
 {% block content %}
 <container>
-    <button>
-        galería
+    <button class="btn ok" onclick="">
+          <img class="img" src="{% static 'media/icons/gallery.png' %}" ></img>
     </button>
-    <button>
-        camara
+    <button class="btn ok">
+        <a href="{% url 'camera' %}" >
+          <img class="img" src="{% static 'media/icons/photo.png' %}" ></img>
+        </a>
     </button>
 </container>
 {% endblock %}

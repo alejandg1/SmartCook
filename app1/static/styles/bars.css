@@ -1,10 +1,10 @@
 .bar {
+  height: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   background-color: #8BB88B;
-  padding: 10px;
 }
 
 .bar ul {
@@ -15,7 +15,7 @@
 }
 
 .bar ul li {
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .bar ul li a {
@@ -25,12 +25,4 @@
 
 .bar ul li a:hover {
   color: #ffff;
-}
-
-nav{
-  height: 5vh;
-}
-
-footer{
-  height: 5vh;
 }

@@ -1,14 +1,35 @@
-button {
-  background-color: #8BB88B;
-  color: black;
+.img{
+  height: 25px;
+  width: 30px;
+}
+
+.btn {
+  align-items: center;
+  justify-items: center;
   border-radius: 10px;
   font-size: 17px;
   font-weight: 600;
   padding: 9px 9px;
   cursor: pointer;
+  border: 0;
 }
 
-button:hover {
-    background-color: #ffdd;
-};
+.ok{
+  background-color: #8BB88B;
+  color: black;
+}
+
+.dng{
+  background-color: red;
+  color: black;
+
+}
+
+.ok:hover {
+  background-color: #ffdd;
+}
+
+.dng:hover {
+  background-color: #ffdd;
+}
 

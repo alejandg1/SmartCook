@@ -1,0 +1,34 @@
+{% extends "components/base.html" %}
+
+{% load static %}
+
+{% block Ustyles  %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/camera.css' %}"
+  />
+{% endblock  %}
+
+{% block content %}
+<div class="media">
+
+  <video id="divcam" class="webcam"></video>
+  <div>
+    <button class="btn ok" onclick="takephoto()" >
+      <img class="img" src="{% static 'media/icons/take.png' %}" ></img>
+    </button>
+    <button class="btn ok" onclick="" >
+      <img class="img" src="{% static 'media/icons/change.png' %}" ></img>
+    </button>
+    <button class="btn dng">
+        <a href="{% url 'cocina' %}" >
+          <img class="img" src="{% static 'media/icons/close.png' %}" ></img>
+        </a>
+    </button>
+  </div>
+</div>
+{% endblock %}
+
+{% block Uscripts %}
+  <script src="{% static 'js/webcam.js' %}"></script>
+{% endblock %}

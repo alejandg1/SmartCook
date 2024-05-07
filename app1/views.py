@@ -38,6 +38,10 @@ def perfil(request):
     return render(request, 'perfil.html')
 
 
+def camera(request):
+    return render(request, 'camera.html')
+
+
 def photo(request):
     camera = capture.camera()
     camera.takePhoto()

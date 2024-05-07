@@ -11,6 +11,5 @@ urlpatterns = [
     path('singin/', views.singin, name='singin'),
     path('receta/', views.receta, name='receta'),
     path('perfil/', views.perfil, name='perfil'),
-
-    path('photo', views.photo, name='photo'),
+    path('camera', views.camera, name='camera'),
 ]

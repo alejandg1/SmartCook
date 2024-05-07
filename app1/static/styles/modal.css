@@ -32,9 +32,3 @@
   padding: 15px;
   text-align: center;
 }
-
-/* Estilos para los botones del modal */
-.btn.btn-primary,
-.btn.btn-secondary {
-  margin-right: 5px;
-}

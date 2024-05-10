@@ -11,8 +11,12 @@
 
 {% block content %}
 <div class="media">
-
+  <div>
+      <p>camara</p>
+	  	<select name="list" id="list"></select>
+	</div>
   <video id="divcam" class="webcam"></video>
+  <canvas id="canvas" style="display: none;"></canvas>
   <div>
     <button class="btn ok" onclick="takephoto()" >
       <img class="img" src="{% static 'media/icons/take.png' %}" ></img>
@@ -30,5 +34,6 @@
 {% endblock %}
 
 {% block Uscripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/webcam.js' %}"></script>
 {% endblock %}

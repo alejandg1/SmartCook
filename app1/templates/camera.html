@@ -21,9 +21,9 @@
     <button class="btn ok" onclick="takephoto()" >
       <img class="img" src="{% static 'media/icons/take.png' %}" ></img>
     </button>
-    <button class="btn ok" onclick="" >
+    {% comment %} <button class="btn ok" onclick="" >
       <img class="img" src="{% static 'media/icons/change.png' %}" ></img>
-    </button>
+    </button> {% endcomment %}
     <button class="btn dng">
         <a href="{% url 'cocina' %}" >
           <img class="img" src="{% static 'media/icons/close.png' %}" ></img>

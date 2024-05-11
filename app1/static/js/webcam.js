@@ -15,16 +15,20 @@ const SelectDevice = () => {
       const videoDevices = [];
       devices.forEach(device => {
         const type = device.kind;
+        console.log(device)
         if (type === "videoinput") {
           videoDevices.push(device);
         }
       });
       if (videoDevices.length > 0) {
+        let cam = 0
         videoDevices.forEach(dispositivo => {
+          cam=cam+1
           const option = document.createElement('option');
           option.value = dispositivo.deviceId;
-          option.text = dispositivo.label;
-          $("#list").appendChild(option);
+          option.text = "camara "+cam+": "+dispositivo.kind;
+          console.log(dispositivo)
+          $("#list").append(option);
         });
       }
     });
@@ -38,7 +42,7 @@ async function openCam(IDdev) {
 
   }
   try {
-    let stream = await navigator.mediaDevices.getUserMedia()
+    let stream = await navigator.mediaDevices.getUserMedia(constr)
     video.srcObject = stream
     video.play()
   }
@@ -48,14 +52,16 @@ async function openCam(IDdev) {
 }
 
 function takephoto() {
-  const context = canvas.getContext('2d');
-  if (video.paused || video.ended) {
-    console.error("Can't capture image, video is not playing");
-    return;
-  }
+  video.pause();
+  let contexto = canvas.getContext("2d");
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
-  context.drawImage(video, 0, 0);
+  contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  let foto = canvas.toDataURL(); //Esta es la foto, en base 64
+  // toca hacer una petición pa guardarlo
+  video.play();
+
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -69,6 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 })
 
-$("#list").onchange = () => {
+document.getElementById("list").addEventListener("change", () => {
   openCam($("#list").value)
 }
+)

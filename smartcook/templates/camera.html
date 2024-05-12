@@ -1,0 +1,39 @@
+{% extends "bases/base.html" %}
+
+{% load static %}
+
+{% block Ustyles  %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/camera.css' %}"
+  />
+{% endblock  %}
+
+{% block content %}
+<div class="media">
+  <div>
+      <p>camara</p>
+	  	<select name="list" id="list"></select>
+	</div>
+  <video id="divcam" class="webcam"></video>
+  <canvas id="canvas" style="display: none;"></canvas>
+  <div>
+    <button class="btn ok" onclick="takephoto()" >
+      <img class="img" src="{% static 'media/icons/take.png' %}" ></img>
+    </button>
+    {% comment %} <button class="btn ok" onclick="" >
+      <img class="img" src="{% static 'media/icons/change.png' %}" ></img>
+    </button> {% endcomment %}
+    <button class="btn dng">
+        <a href="{% url 'smartcook:kitchen' %}" >
+          <img class="img" src="{% static 'media/icons/close.png' %}" ></img>
+        </a>
+    </button>
+  </div>
+</div>
+{% endblock %}
+
+{% block Uscripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/webcam.js' %}"></script>
+{% endblock %}

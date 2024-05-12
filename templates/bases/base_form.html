@@ -1,0 +1,27 @@
+{% extends "bases/base.html" %}
+{% load static %}
+{% block Ustyles %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/form.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/card.css' %}"
+  />
+{% endblock %}
+{% block content %}
+    <h1>{{ user.Username }}</h1>
+      <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+          {% block controls %}
+          {% endblock %}
+
+           {% if form.errors %}
+               <p>Form is invalid</p>
+          {% endif %}
+      </form>
+{% endblock %}
+

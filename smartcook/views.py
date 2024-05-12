@@ -1,29 +1,30 @@
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
 
 
-class HistoryView(TemplateView):
+class HistoryView(LoginRequiredMixin, TemplateView):
     template_name = 'history.html'
 
 
-class KitchenView(TemplateView):
+class KitchenView(LoginRequiredMixin, TemplateView):
     template_name = 'kitchen.html'
 
 
-class SearchView(TemplateView):
+class SearchView(LoginRequiredMixin, TemplateView):
     template_name = 'search.html'
 
 
-class RecipeView(TemplateView):
+class RecipeView(LoginRequiredMixin, TemplateView):
     template_name = 'components/recipe.html'
 
 
-class CameraView(TemplateView):
+class CameraView(LoginRequiredMixin, TemplateView):
     template_name = 'camera.html'
 
 
-class GaleryView(TemplateView):
+class GaleryView(LoginRequiredMixin, TemplateView):
     template_name = 'galery.html'

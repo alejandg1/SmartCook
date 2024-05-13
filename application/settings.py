@@ -21,7 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'smartcook',
-    'security'
+    'security',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -98,4 +99,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'  # url de imagenes
 AUTH_USER_MODEL = "security.User"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = '/login'
+LOGIN_URL = 'security:login'

@@ -1,23 +1,26 @@
-{% extends "components/base.html" %}
+{% extends "bases/base_form.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block controls %}
 {% endblock %}
 
-<!-- {% block content %} -->
-<!--     <div> -->
-<!--         <h1>Iniciar Sesión</h1> -->
-<!--         <form class = "shadow"action="/edit_user" method="POST"> -->
-<!--             <label for="email"> -->
-<!--                 Email: -->
-<!--                 <input type="email" name="email"> -->
-<!--             </label> -->
-<!--             <label for="password"> -->
-<!--                 Password: -->
-<!--                 <input type="password" name="password"> -->
-<!--             </label> -->
-<!--             <button class="btn ok" type="button">continuar</button> -->
-<!--             <button class="btn ok" href="{% url 'singin' %}" type="button">crear usuario</button> -->
-<!--         </form> -->
-<!--     </div> -->
-<!-- {% endblock %} -->
+{% comment %}
+  
+{% block content %}
+    <div>
+        <h1>Iniciar Sesión</h1>
+        <form class = "shadow"action="/edit_user" method="POST">
+            <label for="email">
+                Email:
+                <input type="email" name="email">
+            </label>
+            <label for="password">
+                Password:
+                <input type="password" name="password">
+            </label>
+            <button class="btn ok" type="button">continuar</button>
+            <button class="btn ok" href="{% url 'singin' %}" type="button">crear usuario</button>
+        </form>
+    </div>
+{% endblock %}
+{% endcomment %}

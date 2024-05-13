@@ -11,35 +11,27 @@
   />
 {% endblock %}
 {% block content %}
- <section id="portfolio" class=" container portfolio section-bg" data-aos="fade-up" data-aos-delay="100">
     <div class="section-title">
-        <h2 style="margin-left:-7px;">Mantenimiento {{title}}</h2>
+        <h2 style="margin-left:-7px;">{{title}}</h2>
     </div>
-   {% include "components/error.html" %}
-   {% if field.errors %}
-  <div class="invalid-feedback">
-    {% for error in field.errors %}
-      {{ error }}
-    {% endfor %}
-  </div>
-  {% endif %}
-  {% if form.errors %}
-    <div class="alert alert-danger">
-        {{ form.errors }}
-    </div>
-{% endif %}
-   <form method="POST" enctype="multipart/form-data" class="m-4" id="form-container"> 
+   <form method="POST"
+     enctype="multipart/form-data"
+     class="m-4" id="form-container"> 
       
         {% csrf_token %}
-        {% block controls %} {% endblock %}
+        {% block controls %} 
+        {% endblock %}
         {% block buttons %} 
-            <button id="btnGrabar" class="btn btn-primary btn-nuevo" type="submit">
+            <button id="btnGrabar"
+              class="btn btn-primary btn-nuevo"
+              type="submit">
                 {{button}}
             </button>
-            <a class="btn btn-outline-danger ms-2" href="{{ back_url }}">Cancelar</a>
+            <a class="btn btn-outline-danger ms-2"
+              href="{{ back_url }}">
+              Cancelar
+            </a>
         {% endblock %}
-        
-    </form>
- </section>
+   </form>
 {% endblock %}
 

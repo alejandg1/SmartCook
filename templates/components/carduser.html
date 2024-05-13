@@ -2,19 +2,23 @@
 <card>
   <div class="card shadow">
     <div class="card-header">
-      <h2>Username</h2>
+      <h2>{{user.username}}</h2>
     </div>
     <div class="card-body">
       <div>
         <img src="{% static 'media/icons/user.png' %}" />
       </div>
       <div>
-        <p>email: example@gmail.com</p>
-        <p>password: *******</p>
+        <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
+        <p>Correo: {{user.email}}</p>
         <div class="button">
           <button class="btn_ok">
             <a href="{% url 'security:edit' %}">Editar</a>
           </button>
+          <button class="btn_danger">
+            <a href="{% url 'security:logout' %}">Salir</a>
+          </button>
+
         </div>
       </div>
     </div>

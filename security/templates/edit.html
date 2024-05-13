@@ -1,32 +1,24 @@
 {% extends "bases/base_form.html" %}
 {% load static %}
-
 {% block controls %}
+            <label for="first_name">
+                nombre:
+                <input value="{{user.first_name}}" name="first_name">
+            </label>
+            <label for="last_name">
+                apellido:
+                <input value="{{user.last_name}}" name="last_name">
+            </label>
+            <label for="username">
+                Username:
+                <input value="{{user.username}}" name="username">
+            </label>
+            <label for="email">
+                correo:
+                <input value="{{user.email}}" name="first_name">
+            </label>
+            <label for="password">
+                Password:
+                <input value="{{user.password}}" type="password" name="password">
+            </label>
 {% endblock %}
-
-
-<!-- {% block content %} -->
-<!--     <div> -->
-<!--         <h1>Editar Usuario</h1> -->
-<!--         <form class="shadow" action="" method="POST"> -->
-<!--             <label for="name"> -->
-<!--                 Nombre: -->
-<!--                 <input type="text" name="name" value="default name"> -->
-<!--             </label> -->
-<!--             <label for="email"> -->
-<!--                 Email: -->
-<!--                 <input type="email" name="email" value="default email"> -->
-<!--             </label> -->
-<!--             <label for="password"> -->
-<!--                 Password: -->
-<!--                 <input type="password" name="password" value="default passw"> -->
-<!--             </label> -->
-<!--             <button class="btn ok" type="button">guardar</button> -->
-<!--             <button class="btn dng" type="button"> -->
-<!--               <a href="{% url 'perfil' %}" > -->
-<!--                 cancelar -->
-<!--               </a> -->
-<!--             </button> -->
-<!--         </form> -->
-<!--     </div> -->
-<!-- {% endblock %} -->

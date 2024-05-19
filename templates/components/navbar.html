@@ -4,15 +4,22 @@
   </div>
   <div>
     <ul>
+      {% if user.is_authenticated %}
       <li>
-        <a href="{% url 'smartcook:index' %}">Inicio</a>
-      </li>
-      <li>
-        <a href="{% url 'security:profile' %}">perfil</a>
+        <a href="{% url 'security:profile' %}">{{user.username}}</a>
       </li>
       <li>
         <a href="{% url 'smartcook:history' %}">Historial</a>
       </li>
+      {% else %}
+      <li>
+        <a href="{% url 'security:login' %}">Ingresar</a>
+      </li>
+      <li>
+        <a href="{% url 'security:singin' %}">Registrarse</a>
+      </li>
+      {% endif %}
+
     </ul>
   </div>
 </nav>

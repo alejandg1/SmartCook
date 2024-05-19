@@ -11,17 +11,27 @@
   />
 {% endblock %}
 {% block content %}
-    <h1>{{ user.Username }}</h1>
-      <form method="POST">
-          {% csrf_token %}
-          {{ form.as_p }}
-
-          {% block controls %}
-          {% endblock %}
-
-           {% if form.errors %}
-               <p>Form is invalid</p>
-          {% endif %}
-      </form>
+    <div class="section-title">
+        <h2 style="margin-left:-7px;">{{title}}</h2>
+    </div>
+   <form method="POST"
+     enctype="multipart/form-data"
+     class="m-4" id="form-container"> 
+      
+        {% csrf_token %}
+        {% block controls %} 
+        {% endblock %}
+        {% block buttons %} 
+            <button id="btnGrabar"
+              class="btn btn-primary btn-nuevo"
+              type="submit">
+                {{button}}
+            </button>
+            <a class="btn btn-outline-danger ms-2"
+              href="{{ back_url }}">
+              Cancelar
+            </a>
+        {% endblock %}
+   </form>
 {% endblock %}
 

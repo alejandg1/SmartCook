@@ -54,6 +54,7 @@ class User(AbstractUser, PermissionsMixin):
 
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
+    PASSWORD_FIELD = 'password'
     REQUIRED_FIELDS = ['email']
 
     class Meta:

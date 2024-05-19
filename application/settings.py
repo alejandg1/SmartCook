@@ -14,6 +14,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -21,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'smartcook',
-    'security'
+    'security',
 ]
 
 MIDDLEWARE = [
@@ -83,19 +85,20 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'es-ec'
-
+LANGUAGE_CODE = 'en-US'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
-
 STATIC_URL = '/static/'  # url de archivos estaticos
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'  # url de imagenes
-AUTH_USER_MODEL = "security.User"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = '/login'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
+AUTH_USER_MODEL = "security.User"
+LOGIN_URL = 'security:login'
+LOGIN_REDIRECT_URL = 'security:profile'
+LOGOUT_REDIRECT_URL = 'smartcook:index'
+SINGIN_REDIRECT_URL = 'smartcook:index'
+SINGIN_URL = 'security:singin'

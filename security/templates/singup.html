@@ -1,0 +1,9 @@
+{% extends "bases/base_form.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block controls %}
+
+{{ form|crispy }}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "bases/base.html" %}
+{% load static %}
+{% block Ustyles %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/form.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/card.css' %}"
+  />
+{% endblock %}
+{% block content %}
+    <div class="section-title">
+        <h2 style="margin-left:-7px;">{{title}}</h2>
+    </div>
+   <form method="POST"
+     enctype="multipart/form-data"
+     class="m-4" id="form-container"> 
+      
+        {% csrf_token %}
+        {% block controls %} 
+        {% endblock %}
+        {% block buttons %} 
+            <button id="btnGrabar"
+              class="btn btn-primary btn-nuevo"
+              type="submit">
+                {{button}}
+            </button>
+            <a class="btn btn-outline-danger ms-2"
+              href="{{ back_url }}">
+              Cancelar
+            </a>
+        {% endblock %}
+   </form>
+{% endblock %}
+

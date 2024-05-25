@@ -1,0 +1,15 @@
+{% extends "bases/base.html" %}
+
+{% load static %}
+{% block content %}
+<container>
+    <button class="btn ok" onclick="">
+      <img class="img"  href="{% url 'smartcook:galery' %}" src="{% static 'media/icons/gallery.png' %}" ></img>
+    </button>
+    <button class="btn ok">
+        <a href="{% url 'smartcook:camera' %}" >
+          <img class="img" src="{% static 'media/icons/photo.png' %}" ></img>
+        </a>
+    </button>
+</container>
+{% endblock %}

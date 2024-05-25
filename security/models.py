@@ -53,9 +53,11 @@ class User(AbstractUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'username'
-    EMAIL_FIELD = 'email'
+    FIRST_NAME_FIELD = 'first_name'
+    LAST_NAME_FIELD = 'last_name'
     PASSWORD_FIELD = 'password'
-    REQUIRED_FIELDS = ['email']
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = 'User'

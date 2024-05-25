@@ -1,0 +1,12 @@
+{% load static %}
+<button 
+  type="{{ type|default:'button'}}" 
+  class="{{ class|default:'btn ok' }}" 
+  id="{{ id|default:'' }}"
+>
+{% if icon %}
+<img src="{% static icon %}" alt="{{alt|default:'alt'}}">
+{% else %}
+  {{ text|default:'btn' }}
+{% endif %}
+</button>

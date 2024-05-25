@@ -17,20 +17,12 @@
    <form method="POST"
      enctype="multipart/form-data"
      class="m-4" id="form-container"> 
-      
         {% csrf_token %}
         {% block controls %} 
         {% endblock %}
         {% block buttons %} 
-            <button id="btnGrabar"
-              class="btn btn-primary btn-nuevo"
-              type="submit">
-                {{button}}
-            </button>
-            <a class="btn btn-outline-danger ms-2"
-              href="{{ back_url }}">
-              Cancelar
-            </a>
+        {% include "components/button.html"  with  submit=1 type="submit" id="btnGrabar" icon='fa-save' %}
+        {% include "components/button.html"  with  class='btn btn-danger ms-2' icon='fa-cancel' back=back_url %}
         {% endblock %}
    </form>
 {% endblock %}

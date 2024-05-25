@@ -1,5 +1,6 @@
 let video = document.getElementById("divcam")
 let canvas = document.getElementById("canvas")
+let id = document.getElementById("ID").className
 const GetDevice = () => navigator
   .mediaDevices
   .enumerateDevices();
@@ -23,10 +24,10 @@ const SelectDevice = () => {
       if (videoDevices.length > 0) {
         let cam = 0
         videoDevices.forEach(dispositivo => {
-          cam=cam+1
+          cam = cam + 1
           const option = document.createElement('option');
           option.value = dispositivo.deviceId;
-          option.text = "camara "+cam+": "+dispositivo.kind;
+          option.text = "camara " + cam + ": " + dispositivo.kind;
           console.log(dispositivo)
           $("#list").append(option);
         });
@@ -58,10 +59,11 @@ function takephoto() {
   canvas.height = video.videoHeight;
   contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-  let foto = canvas.toDataURL(); //Esta es la foto, en base 64
-  // toca hacer una petición pa guardarlo
+  let foto = canvas.toDataURL('../media/png/user_' + id + Date.now() + '.png');
+
   video.play();
 
+  return foto;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -76,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 })
 
 document.getElementById("list").addEventListener("change", () => {
+  console.log($("#list").value)
   openCam($("#list").value)
 }
 )

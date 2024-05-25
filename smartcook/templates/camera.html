@@ -12,18 +12,17 @@
 {% block content %}
 <div class="media">
   <div>
-      <p>camara</p>
+    <p id="ID" class="{{user.ID}}">camara</p>
 	  	<select name="list" id="list"></select>
 	</div>
   <video id="divcam" class="webcam"></video>
-  <canvas id="canvas" style="display: none;"></canvas>
+  <canvas id="canvas">
+    <img src="",alt="photo"></img>
+  </canvas>
   <div>
     <button class="btn ok" onclick="takephoto()" >
       <img class="img" src="{% static 'media/icons/take.png' %}" ></img>
     </button>
-    {% comment %} <button class="btn ok" onclick="" >
-      <img class="img" src="{% static 'media/icons/change.png' %}" ></img>
-    </button> {% endcomment %}
     <button class="btn dng">
         <a href="{% url 'smartcook:kitchen' %}" >
           <img class="img" src="{% static 'media/icons/close.png' %}" ></img>

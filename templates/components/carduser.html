@@ -9,16 +9,13 @@
         <img src="{% static 'media/icons/user.png' %}" />
       </div>
       <div>
+        <div id="card-body">
         <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
         <p>Correo: {{user.email}}</p>
-        <div class="button">
-          <button class="btn_ok">
-            <a href="{% url 'security:edit' %}">Editar</a>
-          </button>
-          <button class="btn_danger">
-            <a href="{% url 'security:logout' %}">Salir</a>
-          </button>
-
+        </div>
+        <div id="card-btn">
+          {% include "components/button.html" with page='security:edit' id='editBtn' icon="fa-edit" %}
+          {% include "components/button.html" with class="btn btn-danger ms-2" page='security:logout' id='exitBtn' icon="fa fa-sign-out" %}
         </div>
       </div>
     </div>

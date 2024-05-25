@@ -1,6 +1,6 @@
 {% load static %}
 <card>
-  <div class="list">
+  <div class="container text-center list">
     <img class="icon" src="{% static 'media/icons/pencil.png' %}"/>
     <div class="titulo">{{nombre}}</div>
     <button class="btn btn-success" onclick="modal('{% url 'smartcook:recipe' %}')" id="{{id}}">

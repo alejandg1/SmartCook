@@ -3,8 +3,6 @@
   <div class="container text-center list">
     <img class="icon" src="{% static 'media/icons/pencil.png' %}"/>
     <div class="titulo">{{nombre}}</div>
-    <button class="btn btn-success" onclick="modal('{% url 'smartcook:recipe' %}')" id="{{id}}">
-      <img src="{% static 'media/icons/eye.png' %}" />
-    </button>
+    {% include "components/button.html" with onclick="modal()" id="{{id}}" submit=1 icon="fa-camera" %}
   </div>
 </card>

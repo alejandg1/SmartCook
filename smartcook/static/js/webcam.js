@@ -1,81 +1,55 @@
-let video = document.getElementById("divcam")
-let canvas = document.getElementById("canvas")
-const GetDevice = () => navigator
-  .mediaDevices
-  .enumerateDevices();
-
-function ClearSelect() {
-  $("#list").empty()
-}
-
-const SelectDevice = () => {
-  ClearSelect();
-  GetDevice()
-    .then(devices => {
-      const videoDevices = [];
-      devices.forEach(device => {
-        const type = device.kind;
-        console.log(device)
-        if (type === "videoinput") {
-          videoDevices.push(device);
-        }
-      });
-      if (videoDevices.length > 0) {
-        let cam = 0
-        videoDevices.forEach(dispositivo => {
-          cam=cam+1
-          const option = document.createElement('option');
-          option.value = dispositivo.deviceId;
-          option.text = "camara "+cam+": "+dispositivo.kind;
-          console.log(dispositivo)
-          $("#list").append(option);
-        });
-      }
-    });
-}
-
-async function openCam(IDdev) {
-  let constr = {
-    video: { width: 520, height: 420 },
+document.addEventListener("DOMContentLoaded", () => {
+  let videoDiv = document.getElementById("divcam")
+  let canvas = document.getElementById("canvas")
+  let userID = document.getElementById("user").value
+  let token = document.getElementById("token").value
+  let img = undefined
+  navigator.mediaDevices.getUserMedia({
+    video: {
+      width: 520,
+      height: 420
+    },
     audio: false,
-    device: IDdev
+  })
+    .then(stream => {
+      videoDiv.srcObject = stream
+      videoDiv.play()
+    })
+    .catch(error => {
+      console.log(error)
+    })
 
-  }
-  try {
-    let stream = await navigator.mediaDevices.getUserMedia(constr)
-    video.srcObject = stream
-    video.play()
-  }
-  catch (error) {
-    console.log(error)
-  }
-}
+  document.getElementById("take").addEventListener("click", () => {
+    videoDiv.pause();
+    let contexto = canvas.getContext("2d");
+    canvas.width = videoDiv.videoWidth;
+    canvas.height = videoDiv.videoHeight;
+    contexto.drawImage(videoDiv, 0, 0, canvas.width, canvas.height);
+    let foto = canvas.toDataURL('../media/png/' + userID + '.png');
+    videoDiv.play();
+    img = foto
+  })
+  document.getElementById("savePht").addEventListener("click", async () => {
+    // let url = "http://localhost:8000/img/"
+    let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/img/"
+    if (img === undefined) {
+      alert("No se ha tomado la foto")
+      return
+    }
+    console.log(img)
+    let resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": token
+      },
+      body: JSON.stringify({
+        image: img,
+        user: userID
+      })
 
-function takephoto() {
-  video.pause();
-  let contexto = canvas.getContext("2d");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  let foto = canvas.toDataURL(); //Esta es la foto, en base 64
-  // toca hacer una petición pa guardarlo
-  video.play();
-
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    SelectDevice()
-    openCam($("#list").value)
-    navigator.mediaDevices.enumerateDevices()
-  }
-  catch (e) {
-    console.log(e)
-  }
+    })
+    let data = await resp.json()
+    console.log(data)
+  })
 })
-
-document.getElementById("list").addEventListener("change", () => {
-  openCam($("#list").value)
-}
-)

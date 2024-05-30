@@ -5,7 +5,7 @@ from security.models import User
 class TempImg(models.Model):
     imgID = models.AutoField(primary_key=True)
     url = models.CharField(max_length=255)
-    data = models.BinaryField(blank=True, null=True)
+    data = models.ImageField(upload_to="png/", blank=True, null=True)
     userID = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

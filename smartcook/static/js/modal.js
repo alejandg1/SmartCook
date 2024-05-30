@@ -1,9 +1,10 @@
-function modal(url){
-  $('.modalcont').load(url, function(){
+//NOTE: deshuso
+function modal() {
+  $('.modalcont').load(url, function() {
   })
 }
 
 
-function unload(){
+function unload() {
   $('.modalcont').empty()
 }

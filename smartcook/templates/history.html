@@ -24,6 +24,15 @@
 
 
 {% block Uscripts %}
+  <script>
+    var url = "{% url 'smartcook:recipe' %}";
+    function modal() {
+    $('.modalcont').load(url, function() {
+    })
+   }
+  function unload() {
+    $('.modalcont').empty()
+  }
+  </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}

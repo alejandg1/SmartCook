@@ -1,5 +1,9 @@
 from django.views.generic import TemplateView
+import json
+from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from . import models
+from django.views.decorators.csrf import csrf_exempt
 
 
 class IndexView(TemplateView):
@@ -28,3 +32,14 @@ class CameraView(LoginRequiredMixin, TemplateView):
 
 class GaleryView(LoginRequiredMixin, TemplateView):
     template_name = 'galery.html'
+
+
+@csrf_exempt
+def PostImage(request):
+    req = json.loads(request)
+    if req.method == 'POST':
+        print(req.body)
+        models.TempImg.objects.create(
+            image=req.body['image'], user=req.body['user'])
+        return HttpResponse('Image upload success')
+    return HttpResponse('Image upload failed')

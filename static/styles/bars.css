@@ -1,5 +1,4 @@
 .bar {
-  height: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,6 +11,7 @@
   margin: 0;
   padding: 0;
   display: flex;
+  color: white;
 }
 
 .bar ul li {
@@ -20,7 +20,10 @@
 
 .bar ul li a {
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
+  list-style-type: none;
+  margin-right: -3;
+  display: flex;
 }
 
 .bar ul li a:hover {

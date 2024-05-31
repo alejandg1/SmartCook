@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       body: JSON.stringify({
         image: img,
-        user: userID
+        userID: parseInt(userID)
       })
 
     })

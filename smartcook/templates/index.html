@@ -1,7 +1,5 @@
 {% extends "bases/base.html" %}
 {% block content %}
     <img src="" alt="main_img" ></img>
-    <button class="btn ok">
-        <a href="{% url 'smartcook:kitchen' %}" >Cocinar</a>
-    </button>
+    {% include "components/button.html" with page='smartcook:kitchen' id="cook" text="cocinar" %}
 {% endblock %}

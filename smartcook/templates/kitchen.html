@@ -3,13 +3,7 @@
 {% load static %}
 {% block content %}
 <container>
-    <button class="btn ok" onclick="">
-      <img class="img"  href="{% url 'smartcook:galery' %}" src="{% static 'media/icons/gallery.png' %}" ></img>
-    </button>
-    <button class="btn ok">
-        <a href="{% url 'smartcook:camera' %}" >
-          <img class="img" src="{% static 'media/icons/photo.png' %}" ></img>
-        </a>
-    </button>
+      {% include "components/button.html" with page='smartcook:galery' id='galery' icon="fa fa-picture-o" %}
+      {% include "components/button.html" with page='smartcook:camera' id='camera' icon="fa fa-camera" %}
 </container>
 {% endblock %}

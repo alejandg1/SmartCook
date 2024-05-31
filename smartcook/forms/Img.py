@@ -1,9 +1,9 @@
 from django.forms import ModelForm
-from app1 import TempImg
+from smartcook.models import TempImg
 
 
-class CreditForm(ModelForm):
+class ImgForm(ModelForm):
     class Meta:
         model = TempImg
-        fields = '__all__'
-        exclude = []
+        fields = ['image']
+        exclude = ['userID']

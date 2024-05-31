@@ -37,3 +37,4 @@ class SingupForm(UserCreationForm):
             'password1': 'Contraseña',
             'password2': 'Confirmar contraseña'
         }
+        

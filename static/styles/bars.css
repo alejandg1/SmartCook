@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   background-color: #2EB872;
+  font-size: 1.2em;/*tamaño de letra de smartcook*/
 }
 
 .bar ul {
@@ -24,6 +25,8 @@
   list-style-type: none;
   margin-right: -3;
   display: flex;
+  font-size: 1.2em;/*tamaño de letra de ingresar y registrar*/
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;/*letra de ingresar,registrar*/
 }
 
 .bar ul li a:hover {

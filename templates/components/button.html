@@ -1,6 +1,6 @@
 <button 
   type="{{ type|default:'button'}}" 
-  class="{{ class|default:'btn btn-success ms-2' }}" 
+  class="{{ class|default:'btn btn-success ms-2' }} btn-icono-grande" 
   id="{{ id|default:'' }}"
   onclick="{{ onclick|default:'' }}"
 >
@@ -13,7 +13,7 @@
       href={% url page %}
     {% endif %}
   {% endif %}
-    class='fa-solid {{icon}}'></a>
+    class='fa-solid {{icon}} icono grande'></a>
   {% else %}
   {{ text|default:'' }}
   {% endif %}

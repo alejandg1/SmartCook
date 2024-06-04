@@ -25,31 +25,45 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = videoDiv.videoWidth;
     canvas.height = videoDiv.videoHeight;
     contexto.drawImage(videoDiv, 0, 0, canvas.width, canvas.height);
-    let foto = canvas.toDataURL('../media/png/' + userID + '.png');
+    let foto = canvas.toDataURL('media/image.png');
     videoDiv.play();
     img = foto
   })
   document.getElementById("savePht").addEventListener("click", async () => {
-    // let url = "http://localhost:8000/img/"
-    let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/img/"
+    let url = "http://localhost:8000/galery/"
+    // let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/img/"
     if (img === undefined) {
       alert("No se ha tomado la foto")
       return
     }
-    console.log(img)
-    let resp = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": token
-      },
-      body: JSON.stringify({
-        image: img,
-        userID: parseInt(userID)
+    canvas.toBlob(async blob => {
+      let formData = new FormData()
+      formData.append("image", blob, "image.png")
+      formData.append("userID", parseInt(userID))
+      resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          "X-csrftoken": token
+        },
+        body: formData
       })
-
+      data = await resp.json()
+      console.log(data)
     })
-    let data = await resp.json()
-    console.log(data)
+    // let resp = await fetch(url, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "X-csrftoken": token
+    //   },
+    //   body: JSON.stringify({
+    //     image: img,
+    //     userID: parseInt(userID)
+    //   })
+    //
+    // })
+    // let data = await resp.json()
+    // console.log(data)
   })
 })

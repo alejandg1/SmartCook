@@ -12,27 +12,7 @@
   />
 {% endblock %}
 {% block content %}
-  <div class="historial shadow">
-    <h2>Historial</h2>
-    {% include "components/list_item.html" with nombre="item1" id=1 %} 
-    {% include "components/list_item.html" with nombre="item2" id=2 %} 
-    {% include "components/list_item.html" with nombre="item3" id=3 %}
-  </div>
-  <div class="modalcont"></div>
-
+  <p>{{image}}</p>
 {% endblock %}
 
 
-{% block Uscripts %}
-  <script>
-    var url = "{% url 'smartcook:recipe' %}";
-    function modal() {
-    $('.modalcont').load(url, function() {
-    })
-   }
-  function unload() {
-    $('.modalcont').empty()
-  }
-  </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{% endblock %}

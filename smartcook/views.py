@@ -1,10 +1,14 @@
 from django.views.generic import TemplateView, FormView
 from django.shortcuts import redirect
+from django.core.files.storage import FileSystemStorage
 from django.urls import reverse_lazy
 from smartcook.forms import Img
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import models
-from . import IA
+
+tempURL = './temp/temp.png'
+
+fs = FileSystemStorage()
 
 
 def saveImg(request):
@@ -15,9 +19,7 @@ def saveImg(request):
         existente.save()
     else:
         models.TempImg.objects.create(
-            image=request.FILES['image'],
-            userID=models.User.objects.get(
-                pk=request.user.pk))
+            image=request.FILES['image'], userID=models.User.objects.get(pk=request.user.pk))
 
 
 class IndexView(TemplateView):
@@ -47,7 +49,6 @@ class CameraView(LoginRequiredMixin, TemplateView):
 class GaleryView(LoginRequiredMixin, FormView):
     template_name = 'forms.html'
     form_class = Img.ImgForm
-    success_url = reverse_lazy('smartcook:recognition')
     back_url = reverse_lazy('smartcook:kitchen')
 
     def get_context_data(self, **kwargs):
@@ -62,13 +63,12 @@ class GaleryView(LoginRequiredMixin, FormView):
             form = self.form_class(request.POST, request.FILES)
             if form.is_valid():
                 image = form.cleaned_data['image']
-                imgData = image.read()
-                IA.TEMP_IMG_DATA = imgData
+                if fs.exists(tempURL):
+                    fs.delete(tempURL)
+                fs.save(tempURL, image)
+                return redirect('smartcook:recognition')
         except Exception as e:
             print(e)
-
-    def dispatch(self, request, *args, **kwargs):
-        return redirect('smartcook:recognition')
 
 
 class RecognitionView(LoginRequiredMixin, TemplateView):
@@ -79,6 +79,7 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Reconocimiento de imagen'
         context['back_url'] = self.back_url
+        context['image'] = fs.url(tempURL)
         return context
 
 
@@ -92,7 +93,8 @@ class PostImage(FormView):
             form = self.form_class(request.POST, request.FILES)
             image = form.cleaned_data['image']
             imgData = image.read()
-            IA.TEMP_IMG_DATA = imgData
+            with open(tempURL, 'wb') as f:
+                f.write(imgData)
         except Exception as e:
             print(e)
 

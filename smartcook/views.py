@@ -11,15 +11,15 @@ tempURL = './temp/temp.png'
 fs = FileSystemStorage()
 
 
-def saveImg(request):
-    existente = models.TempImg.objects.get(
-        userID=request.user)
-    if (existente is not None):
-        existente.image = request.FILES['image']
-        existente.save()
-    else:
-        models.TempImg.objects.create(
-            image=request.FILES['image'], userID=models.User.objects.get(pk=request.user.pk))
+# def saveImg(request):
+#     existente = models.TempImg.objects.get(
+#         userID=request.user)
+#     if (existente is not None):
+#         existente.image = request.FILES['image']
+#         existente.save()
+#     else:
+#         models.TempImg.objects.create(
+#             image=request.FILES['image'], userID=models.User.objects.get(pk=request.user.pk))
 
 
 class IndexView(TemplateView):

@@ -5,10 +5,14 @@
         <div class="right">
             <img class="MainFund" src="{% static './media/fondos/nevera.png' %}" alt="main_img" ></img>
         </div>
-        <div class="left text-center"> 
+        <div class="background-overlay"></div>
+        <div class="left">
             <h1>SmartCook</h1>
-            <p class="text-start">¡Bienvenido a SmartCook! Aquí podrás encontrar recetas de cocina, guardar tus favoritas y mucho más.</p>
-            {% include "components/button.html" with page='smartcook:kitchen' id='cook' icon="fa-kitchen-set icono-grande" %}
+            <p>¡Bienvenido a SmartCook! Aquí podrás encontrar recetas de cocina, guardar tus favoritas y mucho más.</p>
+            <button class="btn ok">
+                <a href="{% url 'smartcook:kitchen' %}" >Cocinar</a>
+            </button>
         </div>
     </div>
+    
 {% endblock %}

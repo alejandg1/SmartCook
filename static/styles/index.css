@@ -9,16 +9,17 @@ body {
   justify-content: space-between;
   background-color: #020010;
 }
+
 a {
   text-decoration-line: none;
   color: white;
+  font-size: 1.2em;/*tamaño de letra de smartcook*/
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
 }
 
 p{
   margin-left: 17px;
-}
-*{
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;/*tipo de letra de titulo*/
 }
 
 .content {
@@ -27,8 +28,8 @@ p{
   justify-content: center;
   align-items: center;
   margin: 0 auto; 
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
 }
 
 .modal{
@@ -42,13 +43,23 @@ p{
   height:100%;
   margin-bottom: 5px;
 }
-
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/static/media/fondos/nevera.png') no-repeat center center fixed; /* Ruta a tu imagen */
+  background-size: contain;
+  opacity: 0.3; /* Ajusta este valor para más o menos transparencia */
+  z-index: -1; /* Coloca el fondo detrás del contenido */
+}
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
 }
 
 .right {
@@ -59,10 +70,10 @@ p{
 }
 
 .left {
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
@@ -70,6 +81,7 @@ p{
   margin-bottom: 20px;
   color: #2EB872;
   font-size:4em;/*tamaño del titulo*/
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;/*tipo de letra de titulo*/
 }
 
 .left p {
@@ -77,10 +89,10 @@ p{
   color: #ffffff;
   margin-left: 0%;
   font-family:'Times New Roman', Times, serif;/*tipo de letra de contenido*/
-  font-size:2em;/*tamaño del texto*/
+  font-size:1em;/*tamaño del texto*/
 }
 
-.left .btn {
+.left .btn  {
   margin-bottom: 20px;
 }
 
@@ -90,17 +102,10 @@ p{
   border-radius: 5px;
   align-items: center;
   justify-content: center;
+  background-color: #2EB872;/*fondo de boton cocinar*/
 }
 button{
   color: #ffffff;
   cursor: pointer;
 }
-.icono-grande {
-  font-size: 4em; /* Cambia esto al tamaño que necesites */
-}
 
-.btn-icono-grande {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

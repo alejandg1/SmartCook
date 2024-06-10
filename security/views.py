@@ -49,7 +49,7 @@ class LoginView(LoginView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'inicio de sesión'
+        context['title'] = 'Inicio de sesión'
         context['button'] = 'Login'
         context['back_url'] = reverse_lazy('smartcook:index')
         return context
@@ -73,7 +73,7 @@ class SingUpView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'registro'
+        context['title'] = 'Registro'
         context['button'] = 'Registrar'
         context['back_url'] = reverse_lazy('smartcook:index')
         return context

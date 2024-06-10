@@ -1,29 +1,32 @@
 {% extends "bases/base.html" %}
 {% load static %}
 {% block Ustyles %}
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/form.css' %}"
-  />
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/card.css' %}"
-  />
+  <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/card.css' %}" />
 {% endblock %}
 {% block content %}
+  <div class="form-container">
     <div class="section-title">
-        <h2 style="margin-left:-7px;">{{title}}</h2>
+      <h2 style="margin-left:-7px;">{{title}}</h2>
     </div>
-   <form method="POST"
-     enctype="multipart/form-data"
-     class="m-4" id="form-container"> 
-        {% csrf_token %}
-        {% block controls %} 
-        {% endblock %}
-        {% block buttons %} 
-        {% include "components/button.html"  with  submit=1 type="submit" id="btnGrabar" icon='fa-save' %}
-        {% include "components/button.html"  with  class='btn btn-danger ms-2' icon='fa fa-sign-out' back=back_url %}
-        {% endblock %}
-   </form>
+    <div class="form-wrapper">
+      <div class="signup-form-wrapper">
+        <form method="POST" enctype="multipart/form-data" class="m-4" id="form-container">
+          {% csrf_token %}
+          {% block controls %}
+          {% endblock %}
+          {% block buttons %}
+          <div class="button-container">
+            <button id="btnGrabar" class="btn btn-success" type="submit">
+              {{button}}
+            </button>
+            <a class="btn btn-danger" href="{{ back_url }}">
+              Cancelar
+            </a>
+          </div>
+          {% endblock %}
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}
-

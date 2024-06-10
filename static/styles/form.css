@@ -3,39 +3,68 @@ form {
   margin: 0 auto; /* Centra el formulario en la página */
   padding: 20px; /* Agrega espacio alrededor del contenido del formulario */
   border: 1px solid #ccc; /* Agrega un borde alrededor del formulario */
-  border-radius: 5px; /* Redondea las esquinas del formulario */
+  border-radius: 8px; /* Redondea las esquinas del formulario */
+  background-color: #ccc;
+}
+
+.form-wrapper {
+
+  height: 75vh; /* Ocupa el 80% de la altura de la ventana */
+  overflow: auto;
+  padding: 10px; 
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+  align-items: center;
+}
+
+.form-wrapper::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+h2 {
+  color: #ccc;
 }
 
 /* Estilo para las etiquetas de los inputs */
 label {
-  display: block; /* Muestra las etiquetas en la misma línea que los inputs */
-  margin-bottom: 5px; /* Agrega espacio entre las etiquetas y los inputs */
-  font-weight: bold; /* Hace que las etiquetas sean más gruesas */
+  display: block; 
+  margin-bottom: 5px;
+  font-weight: bold; 
 }
 
 /* Estilo para los inputs de tipo texto */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  padding: 10px; /* Agrega espacio dentro de los inputs */
-  border: 1px solid #ccc; /* Agrega un borde a los inputs */
-  border-radius: 3px; /* Redondea las esquinas de los inputs */
-  box-sizing: border-box; /* Incluye el borde en el ancho del input */
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 3px; 
+  box-sizing: border-box; 
 }
 
-/* Estilo para el botón de envío */
-button[type="submit"] {
-  background-color: #4CAF50; /* Color de fondo del botón */
-  color: white; /* Color del texto del botón */
-  padding: 10px 20px; /* Agrega espacio dentro del botón */
-  border: none; /* Elimina el borde del botón */
-  border-radius: 3px; /* Redondea las esquinas del botón */
-  cursor: pointer; /* Cambia el cursor a mano al pasar el mouse sobre el botón */
+
+.button-container {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
 }
 
-/* Estilo para los mensajes de error (opcional) */
+button.btn-success {
+  background-color: #4CAF50; 
+  color: white;
+  padding: 10px 20px;
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer; 
+}
+
+
+
 .error {
-  color: red; /* Color del mensaje de error */
-  font-size: 12px; /* Tamaño del mensaje de error */
+  color: red; 
+  font-size: 12px; 
 }
+

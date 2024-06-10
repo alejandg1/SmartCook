@@ -30,40 +30,37 @@ document.addEventListener("DOMContentLoaded", () => {
     img = foto
   })
   document.getElementById("savePht").addEventListener("click", async () => {
-    let url = "http://localhost:8000/galery/"
-    // let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/img/"
+    //let url = "http://localhost:8000/img/"
+    let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/img/"
     if (img === undefined) {
       alert("No se ha tomado la foto")
       return
     }
-    canvas.toBlob(async blob => {
-      let formData = new FormData()
-      formData.append("image", blob, "image.png")
-      formData.append("userID", parseInt(userID))
-      resp = await fetch(url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          "X-csrftoken": token
-        },
-        body: formData
+    let Image = canvas.toDataURL('image/png').split(',')[1];
+    let resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        "X-csrftoken": token
+      },
+      body: JSON.stringify({
+        "image": Image,
       })
+    })
       data = await resp.json()
       console.log(data)
-    })
-    // let resp = await fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "X-csrftoken": token
-    //   },
-    //   body: JSON.stringify({
-    //     image: img,
-    //     userID: parseInt(userID)
-    //   })
-    //
-    // })
-    // let data = await resp.json()
-    // console.log(data)
   })
 })
+    
+    // canvas.toBlob(async blob => {
+    //   let formData = new FormData()
+    //   formData.append("image", blob, "image.png")
+    //   formData.append("userID", parseInt(userID))
+    //   resp = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       "X-csrftoken": token
+    //     },
+    //     body: formData
+    //   })

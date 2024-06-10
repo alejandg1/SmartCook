@@ -1,10 +1,11 @@
 from django.views.generic import TemplateView, FormView
+import json
+import base64
 from django.shortcuts import redirect
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse_lazy
 from smartcook.forms import Img
 from django.contrib.auth.mixins import LoginRequiredMixin
-from . import models
 
 tempURL = './temp/temp.png'
 
@@ -63,9 +64,8 @@ class GaleryView(LoginRequiredMixin, FormView):
             form = self.form_class(request.POST, request.FILES)
             if form.is_valid():
                 image = form.cleaned_data['image']
-                if fs.exists(tempURL):
-                    fs.delete(tempURL)
-                fs.save(tempURL, image)
+                data = base64.b64encode(image.read()).decode('utf-8')
+                request.session['image'] = data
                 return redirect('smartcook:recognition')
         except Exception as e:
             print(e)
@@ -73,13 +73,13 @@ class GaleryView(LoginRequiredMixin, FormView):
 
 class RecognitionView(LoginRequiredMixin, TemplateView):
     template_name = 'recognition.html'
-    back_url = reverse_lazy('smartcook:camera')
+    back_url = reverse_lazy('smartcook:kitchen')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Reconocimiento de imagen'
+        context['title'] = 'Resultados'
         context['back_url'] = self.back_url
-        context['image'] = fs.url(tempURL)
+        context['image'] = self.request.session['image']
         return context
 
 
@@ -90,11 +90,14 @@ class PostImage(FormView):
 
     def post(self, request, *args, **kwargs):
         try:
-            form = self.form_class(request.POST, request.FILES)
-            image = form.cleaned_data['image']
-            imgData = image.read()
-            with open(tempURL, 'wb') as f:
-                f.write(imgData)
+            data = json.loads(request.body)
+            image = data.get('image')
+            request.session['image'] = image
+            # form = self.form_class(request.POST, request.FILES)
+            # image = form.cleaned_data['image']
+            # # data = base64.b64encode(image.read()).decode('utf-8')
+            # request.session['image'] = image
+            # print(request.session['image'])
         except Exception as e:
             print(e)
 

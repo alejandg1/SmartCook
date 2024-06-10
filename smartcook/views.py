@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, FormView
+from django.http import HttpResponse
 import json
 import base64
 from django.shortcuts import redirect
@@ -83,44 +84,12 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class PostImage(FormView):
-    form_class = Img.ImgForm
-    success_url = reverse_lazy('smartcook:recognition')
-    back_url = reverse_lazy('smartcook:kitchen')
-
-    def post(self, request, *args, **kwargs):
-        try:
-            data = json.loads(request.body)
-            image = data.get('image')
+def PostImage(request):
+    try:
+        if request.method == 'POST':
+            image = json.loads(request.body)
             request.session['image'] = image
-            # form = self.form_class(request.POST, request.FILES)
-            # image = form.cleaned_data['image']
-            # # data = base64.b64encode(image.read()).decode('utf-8')
-            # request.session['image'] = image
-            # print(request.session['image'])
-        except Exception as e:
-            print(e)
-
-    def dispatch(self, request, *args, **kwargs):
-        return redirect('smartcook:recognition')
-
-
-# proceso anterior post galeria
-
-    # try:
-    #     if request.method == 'POST':
-    #         existente = models.TempImg.objects.get(
-    #             userID=request.user)
-    #         if (existente is not None):
-    #             existente.image = request.FILES['image']
-    #             existente.save()
-    #         else:
-    #             models.TempImg.objects.create(
-    #                 image=request.FILES['image'],
-    #                 userID=models.User.objects.get(
-    #                     pk=request.user.pk))
-    #
-    # except Exception as e:
-    #     print(e)
-    #     return HttpResponse('Image upload failed')
-    # return HttpResponse('Image upload success')
+            return HttpResponse(status=200)
+    except Exception as e:
+        print(e)
+        return HttpResponse(status=500)

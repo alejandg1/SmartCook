@@ -10,6 +10,6 @@ urlpatterns = [
     path('recipe/', views.RecipeView.as_view(), name='recipe'),
     path('camera/', views.CameraView.as_view(), name='camera'),
     path('galery', views.GaleryView.as_view(), name='galery'),
-    path('recognition', views.RecognitionView.as_view(), name='recognition'),
-    path('img/', views.PostImage.as_view(), name='image'),
+    path('recognition/', views.RecognitionView.as_view(), name='recognition'),
+    path('img/', views.PostImage, name='image'),
 ]

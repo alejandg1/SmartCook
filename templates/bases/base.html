@@ -29,12 +29,17 @@
   <body>
 
     {% include "components/navbar.html" %}
-    <div class="content"> 
+    <div class="container text-center row"> 
       {% block content %} 
       {% endblock %} 
     </div>
     {% include "components/footer.html" %}
 
+  <script 
+    defered
+    src="https://kit.fontawesome.com/01c29a7fd7.js" 
+    crossorigin="anonymous">
+  </script>
   {% block Uscripts %}
   {% endblock %}
 

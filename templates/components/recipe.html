@@ -8,25 +8,8 @@
         <p>Instrucciones de la receta...</p>
       </div>
       <div class="modal-footer">
-        {% include
-        "components/button.html"
-        with
-        id='saveModal'
-        alt='save'
-        icon='media/icons/save.png'
-        %}
-
-        {%
-        include
-        "components/button.html"
-        with
-        class='btn dng'
-        id='cancelModal'
-        icon='media/icons/close.png'
-        alt='close'
-        %}
-        <!-- <button type="button" class="btn ok" id="saveModal">Guardar</button> -->
-        <!-- <button type="button" class="btn dng" onclick="unload()" data-dismiss="modal">Cancelar</button> -->
+      {% include "components/button.html" with submit=1 type="submit" icon="fa-save" %}
+      {% include "components/button.html" with submit=1 class="btn btn-danger" onclick='unload()' icon="fa fa-sign-out" %}
       </div>
     </div>
   </div>

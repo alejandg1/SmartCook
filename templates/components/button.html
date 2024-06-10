@@ -1,12 +1,20 @@
-{% load static %}
 <button 
   type="{{ type|default:'button'}}" 
-  class="{{ class|default:'btn ok' }}" 
+  class="{{ class|default:'btn btn-success ms-2' }}" 
   id="{{ id|default:'' }}"
+  onclick="{{ onclick|default:'' }}"
 >
-{% if icon %}
-<img src="{% static icon %}" alt="{{alt|default:'alt'}}">
-{% else %}
-  {{ text|default:'btn' }}
-{% endif %}
+  {% if icon %}
+  <a
+  {% if not submit %}
+    {% if back %}
+      href={{back}}
+    {% else %}
+      href={% url page %}
+    {% endif %}
+  {% endif %}
+    class='fa-solid {{icon}}'></a>
+  {% else %}
+  {{ text|default:'' }}
+  {% endif %}
 </button>

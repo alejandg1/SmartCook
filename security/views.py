@@ -1,11 +1,10 @@
-from django.views.generic import TemplateView ,FormView, CreateView, UpdateView
+from django.views.generic import TemplateView, CreateView, UpdateView
 from django.shortcuts import redirect
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from security.models import User
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import PasswordChangeForm
 from security.forms import forms
 
 
@@ -15,20 +14,13 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['profile'] = User.objects.get(pk=self.request.user.pk)
-        return context
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Cambiar contraseña'
-        context['button'] = 'Cambiar'
         context['back_url'] = reverse_lazy('security:profile')
         return context
 
 
 class EditView(LoginRequiredMixin, UpdateView):
     model = User
-    template_name = 'login.html'
+    template_name = 'forms.html'
     form_class = forms.EditForm
     success_url = reverse_lazy('security:profile')
 
@@ -41,13 +33,14 @@ class EditView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['back_url'] = reverse_lazy('smartcook:index')
+        context['back_url'] = reverse_lazy('security:profile')
         context['title'] = 'editar usuario'
         context['button'] = 'Guardar'
         return context
 
+
 class LoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'forms.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -63,7 +56,6 @@ class LoginView(LoginView):
 
 
 class LogoutView(LoginRequiredMixin, TemplateView):
-    template_name = 'logout.html'
 
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -75,7 +67,7 @@ class LogoutView(LoginRequiredMixin, TemplateView):
 
 
 class SingUpView(CreateView):
-    template_name = 'singup.html'
+    template_name = 'forms.html'
     form_class = forms.SingupForm
     success_url = reverse_lazy('smartcook:index')
 

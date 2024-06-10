@@ -4,10 +4,10 @@ from security.models import User
 
 class TempImg(models.Model):
     imgID = models.AutoField(primary_key=True)
-    url = models.CharField(max_length=255)
-    data = models.BinaryField(blank=True, null=True)
+    image = models.ImageField(upload_to="tempImg/", blank=True, null=True)
     userID = models.ForeignKey(
         User,
+        unique=True,
         on_delete=models.CASCADE,
         null=True,
         blank=True)

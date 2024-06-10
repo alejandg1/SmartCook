@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   let videoDiv = document.getElementById("divcam")
   let canvas = document.getElementById("canvas")
-  let userID = document.getElementById("user").value
   let token = document.getElementById("token").value
   let img = undefined
   navigator.mediaDevices.getUserMedia({
@@ -25,31 +24,33 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = videoDiv.videoWidth;
     canvas.height = videoDiv.videoHeight;
     contexto.drawImage(videoDiv, 0, 0, canvas.width, canvas.height);
-    let foto = canvas.toDataURL('../media/png/' + userID + '.png');
+    let foto = canvas.toDataURL('media/image.png');
     videoDiv.play();
     img = foto
   })
   document.getElementById("savePht").addEventListener("click", async () => {
-    // let url = "http://localhost:8000/img/"
-    let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/img/"
-    if (img === undefined) {
+    //let url = "http://localhost:8000/"
+    let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/"
+    if (img === undefined || img === "") {
       alert("No se ha tomado la foto")
       return
     }
-    console.log(img)
-    let resp = await fetch(url, {
+    let Image = canvas.toDataURL('image/png').split(',')[1];
+    let form = new FormData()
+    form.append("image", Image)
+    let resp = await fetch(url + "img/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": token
+        'Content-Type': 'application/json',
+        "X-csrftoken": token
       },
-      body: JSON.stringify({
-        image: img,
-        userID: parseInt(userID)
-      })
-
+      body: JSON.stringify(Image)
     })
-    let data = await resp.json()
-    console.log(data)
+    if (resp.ok) {
+      window.location.href = url + "recognition/"
+    }
+    else {
+      alert("No se ha podido guardar la imagen")
+    }
   })
 })

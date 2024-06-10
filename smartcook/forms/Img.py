@@ -1,9 +1,7 @@
-from django.forms import ModelForm
-from smartcook.models import TempImg
+from django import forms
 
 
-class ImgForm(ModelForm):
-    class Meta:
-        model = TempImg
-        fields = ['image']
-        exclude = ['userID']
+class ImgForm(forms.Form):
+    image = forms.ImageField(label='Select an image',
+                             widget=forms.FileInput(
+                                 attrs={'class': 'form-control'}))

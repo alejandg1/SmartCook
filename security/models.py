@@ -1,4 +1,5 @@
 from django.db import models
+from smartcook.models import Historial
 from django.contrib.auth.models import (
     AbstractUser,
     UserManager,
@@ -30,18 +31,22 @@ class CustomUserManager(UserManager):
 
 class User(AbstractUser, PermissionsMixin):
     userID = models.AutoField(primary_key=True)
+    history = models.OneToOneField(Historial,
+                                   on_delete=models.CASCADE,
+                                   null=True,
+                                   blank=True)
     last_name = models.CharField('last name',
-                                 max_length=50,
+                                 max_length=20,
                                  blank=True)
     first_name = models.CharField('first name',
-                                  max_length=50,
+                                  max_length=20,
                                   blank=True)
     email = models.EmailField('email',
                               unique=True,
                               blank=False,
                               null=False)
     username = models.CharField('username',
-                                max_length=50,
+                                max_length=20,
                                 unique=True,
                                 blank=False)
     is_staff = models.BooleanField('staff status',

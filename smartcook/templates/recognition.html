@@ -1,0 +1,18 @@
+{% extends "bases/base.html" %}
+{% load static %}
+
+{% block Ustyles %}
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/listItem.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    href="{% static 'styles/modal.css' %}"
+  />
+{% endblock %}
+{% block content %}
+  <p>{{image}}</p>
+{% endblock %}
+
+

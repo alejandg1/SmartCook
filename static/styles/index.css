@@ -1,25 +1,19 @@
 body {
   margin: 0;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: auto;
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-color: #020010;
 }
 
 a {
   text-decoration-line: none;
   color: white;
-  font-size: 1.2em;/*tamaño de letra de smartcook*/
+  font-size: 1.2em;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  
-}
-
-p{
-  margin-left: 17px;
 }
 
 .content {
@@ -32,80 +26,83 @@ p{
   height: 90%;
 }
 
-.modal{
-  display: flex; /* Habilita Flexbox */
-  justify-content: center; /* Alinea horizontalmente en el centro */
-  align-items: center; /* Alinea verticalmente en el centro */
+.modal {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 }
 
-.MainFund{
-  width:100%; 
-  height:100%;
-  margin-bottom: 5px;
+.MainFund {
+  width: 510px; 
+  height: 510px;
 }
-.background-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/static/media/fondos/nevera.png') no-repeat center center fixed; /* Ruta a tu imagen */
-  background-size: contain;
-  opacity: 0.3; /* Ajusta este valor para más o menos transparencia */
-  z-index: -1; /* Coloca el fondo detrás del contenido */
-}
+
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center; 
+  align-items: center; 
   width: 90%;
-  height: 90%;
+  height: 100%; 
 }
 
 .right {
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-right: 8%;
+  margin-right: 5%;
 }
 
 .left {
-
+  margin-left: 5%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .left h1 {
   margin-bottom: 20px;
-  color: #2EB872;
-  font-size:4em;/*tamaño del titulo*/
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;/*tipo de letra de titulo*/
+  color: #7bd4e0;
+  font-size: 250%;
+  text-align: left !important;
 }
 
 .left p {
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #ebebeb;
   margin-left: 0%;
-  font-family:'Times New Roman', Times, serif;/*tipo de letra de contenido*/
-  font-size:1em;/*tamaño del texto*/
-}
-
-.left .btn  {
-  margin-bottom: 20px;
+  font-size: 100%;
+  text-align: left !important;
 }
 
 .left button {
+  margin-bottom: 20px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  background-color: #2EB872;/*fondo de boton cocinar*/
+  background-color: #71b2ba;
+  align-items: center !important;
+  color: #ebebeb;
 }
-button{
-  color: #ffffff;
+
+button {
+  color: #ebebeb;
   cursor: pointer;
 }
 
+.button-container {
+  align-self: center; 
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .left, .right {
+    width: 100%;
+    margin: 0;
+  }
+  .left {
+    margin-bottom: 20px;
+  }
+}

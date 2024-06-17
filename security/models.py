@@ -1,5 +1,4 @@
 from django.db import models
-from smartcook.models import Historial
 from django.contrib.auth.models import (
     AbstractUser,
     UserManager,
@@ -31,10 +30,6 @@ class CustomUserManager(UserManager):
 
 class User(AbstractUser, PermissionsMixin):
     userID = models.AutoField(primary_key=True)
-    history = models.OneToOneField(Historial,
-                                   on_delete=models.CASCADE,
-                                   null=True,
-                                   blank=True)
     last_name = models.CharField('last name',
                                  max_length=20,
                                  blank=True)

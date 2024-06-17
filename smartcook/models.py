@@ -1,4 +1,5 @@
 from django.db import models
+from security.models import User
 
 # me parece mejor no guardar la imagen sino enviarla directo al modelo
 # class TempImg(models.Model):
@@ -20,6 +21,10 @@ from django.db import models
 
 class Historial(models.Model):
     histID = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                null=True,
+                                blank=True)
 
 
 class DetHistorial(models.Model):

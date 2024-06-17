@@ -1,9 +1,18 @@
-/* Estilo del modal */
+
+dialog{
+  max-width: 500px;
+  border: 0px 
+}
+
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .modal-dialog {
-   position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Compensa la mitad del ancho y alto del modal */
+  transform: translate(-50%, -50%);
 }
 
 .modal-content {

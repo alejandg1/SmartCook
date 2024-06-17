@@ -1,5 +1,6 @@
 import tiktoken
 import openai
+from django.template.loader import get_template
 import os
 import base64
 from PIL import Image
@@ -49,21 +50,39 @@ def compress():
         return None
 
 
+class Recipe:
+    def __init__(self, name, description):
+        self.name = name
+        self.description = description
+
+    def __str__(self):
+        return self.name
+
+
 def GPT():
-    with open(directory+'compressed.jpg', 'rb') as f:
-        img = base64.b64encode(f.read()).decode('utf-8')
-    print(img)
-    text = ''
-    key = ''
-    rep = openai.Completion.create(
-        engine="gpt-4o",
-        prompt=text,
-        temperature=0.5,
-        max_tokens=200,
-        api_key=key,
-        imput={
-            "file": img,
-            "prompt": text,
-        }
-    )
-    print(rep)
+    # with open(directory+'compressed.jpg', 'rb') as f:
+    #     img = base64.b64encode(f.read()).decode('utf-8')
+    # print(img)
+    # text = ''
+    # key = ''
+    # rep = openai.Completion.create(
+    #     engine="gpt-4o",
+    #     prompt=text,
+    #     temperature=0.5,
+    #     max_tokens=200,
+    #     api_key=key,
+    #     imput={
+    #         "file": img,
+    #         "prompt": text,
+    #     }
+    # )
+    recipes = [
+        Recipe('Receta 1', 'Descripcion 1'),
+        Recipe('Receta 2', 'Descripcion 2'),
+        Recipe('Receta 3', 'Descripcion 3')
+    ]
+    return recipes
+
+
+def temp():
+    return get_template('components/recipe.html')

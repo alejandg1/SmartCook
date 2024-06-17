@@ -12,9 +12,15 @@
   />
 {% endblock %}
 {% block content %}
-  <p>{{image}}</p>
-  <p>{{size}}</p>
-  <p>{{tokens}}</p>
+  {% for item in recipes %}
+    {% include 'components/list_item.html' with bn='modal' nombre=item.name desc=item.description %}
+  {% endfor %}
+  <div class="modalcont"></div>
+{% endblock %}
+
+{% block Uscripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
 
 

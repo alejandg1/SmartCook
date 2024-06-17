@@ -2,10 +2,10 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalRecetaLabel">Nombre de la receta</h5>
+        <h5 class="modal-title" id="modalRecetaLabel">{{name}}</h5>
       </div>
       <div class="modal-body">
-        <p>Instrucciones de la receta...</p>
+        <p>{{desc}}</p>
       </div>
       <div class="modal-footer">
       {% include "components/button.html" with submit=1 type="submit" icon="fa-save" %}

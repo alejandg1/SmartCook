@@ -12,4 +12,5 @@ urlpatterns = [
     path('galery', views.GaleryView.as_view(), name='galery'),
     path('recognition/', views.RecognitionView.as_view(), name='recognition'),
     path('img/', views.PostImage, name='image'),
+    path('recognition/modal/', views.Modal, name='modal'),
 ]

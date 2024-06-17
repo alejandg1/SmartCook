@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, FormView
+from django.shortcuts import render
 import base64
 from django.http import HttpResponse
 from . import functions
@@ -67,7 +68,7 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Resultados'
         context['back_url'] = self.back_url
-        functions.GPT()
+        context['recipes'] = functions.GPT()
         return context
 
 
@@ -81,3 +82,13 @@ def PostImage(request):
     except Exception as e:
         print(e)
         return HttpResponse(status=500)
+
+
+def Modal(request):
+    name = request.GET.get('name')
+    description = request.GET.get('desc')
+    context = {
+        'name': name,
+        'desc': description
+    }
+    return render(request, 'components/recipe.html', context)

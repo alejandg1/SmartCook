@@ -12,7 +12,33 @@
   />
 {% endblock %}
 {% block content %}
-  <p>{{image}}</p>
+    <input type="hidden" id="token" value="{{ csrf_token }}">
+    <input type="hidden" id="user" value="{{ user.userID }}">
+<div class="container text-center">
+  {% for item in recipes %}
+    {% include 'components/list_item.html' with bn='modal' nombre=item.name desc=item.description %}
+  {% endfor %}
+</div>
+<dialog id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecetaLabel">{{name}}</h5>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+      {% include "components/button.html" with submit=1 type="submit" icon="fa-save" %}
+      {% include "components/button.html" with submit=1 class="btn btn-danger" onclick='unload()' icon="fa fa-sign-out" %}
+      </div>
+  </div>
+</dialog>
+
+
+{% endblock %}
+
+{% block Uscripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
 
 

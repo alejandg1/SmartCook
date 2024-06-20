@@ -32,8 +32,8 @@
   list-style-type: none;
   margin-right: -3;
   display: flex;
-  font-size: 110%;/*tamaño de letra de ingresar y registrar*/
-  font-family: Verdana, Geneva, Tahoma, sans-serif;/*letra de ingresar,registrar*/ 
+  font-size: 110%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .bar ul li a:hover {

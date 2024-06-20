@@ -13,17 +13,17 @@
 }
 
 .historial h2 {
-    margin-top: 0; /* Asegura que no haya espacio superior en el título */
+    margin-top: 0; 
 }
 
 .historial-options {
     max-height: calc(90% - 2em);
-    width: auto; /* Ajustar el ancho según sea necesario */
-    max-height: 500px; /* Ajustar según sea necesario */
-    overflow-y: auto; /* Añadir desplazamiento vertical si es necesario */
+    width: auto; 
+    max-height: 500px; 
+    overflow-y: auto; 
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Espaciado entre elementos */
+    gap: 15px; 
 }
 
 .list {
@@ -54,7 +54,6 @@
     justify-content: center;
 }
 
-/* Ocultar la barra de desplazamiento */
 .historial-options::-webkit-scrollbar {
     width: 0;
     background: transparent;

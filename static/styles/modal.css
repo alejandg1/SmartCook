@@ -1,9 +1,9 @@
-/* Estilo del modal */
+
 .modal-dialog {
    position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Compensa la mitad del ancho y alto del modal */
+  transform: translate(-50%, -50%); 
 }
 
 .modal-content {

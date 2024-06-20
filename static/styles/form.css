@@ -1,8 +1,8 @@
 form {
-  width: 500px; /* Ajusta el ancho del formulario */
-  padding: 20px; /* Agrega espacio alrededor del contenido del formulario */
-  border: 1px solid #ccc; /* Agrega un borde alrededor del formulario */
-  border-radius: 8px; /* Redondea las esquinas del formulario */
+  width: 500px; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
   background-color: #ccc;
   box-sizing: border-box;
   text-align: left;
@@ -10,14 +10,14 @@ form {
 
 .form-container {
   display: flex;
-  flex-direction: column; /* Organiza los elementos en columna */
-  align-items: center; /* Centra los elementos horizontalmente */
-  padding-top: 20px; /* Agrega espacio encima del formulario */
+  flex-direction: column; 
+  align-items: center; 
+  padding-top: 20px; 
 }
 
 .section-title {
-  width: 100%; /* Asegura que el título ocupe el ancho completo */
-  text-align: center; /* Centra el texto del título */
+  width: 100%;
+  text-align: center;
 }
 
 .section-title h2 {
@@ -29,38 +29,36 @@ form {
 .form-wrapper {
   height: auto;
   display: flex;
-  flex-direction: column; /* Ajusta el flujo de contenido */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center; /* Centra el contenido verticalmente */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
   padding: 10px;
   box-sizing: border-box;
 }
 
 .signup-form-wrapper {
-  max-height: 500px; /* Ajusta según sea necesario */
-  overflow-y: auto; /* Permite el desplazamiento vertical */
-  box-sizing: border-box; /* Incluye el padding en el tamaño del contenedor */
+  max-height: 500px; 
+  overflow-y: auto; 
+  box-sizing: border-box; 
 }
 
-/* Oculta visualmente la barra de desplazamiento */
+
 .signup-form-wrapper::-webkit-scrollbar {
-  width: 0; /* Anchura de la barra de desplazamiento */
-  background: transparent; /* Fondo transparente */
+  width: 0;
+  background: transparent; 
 }
 
 .signup-form-wrapper {
-  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
-  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
 }
 
-/* Estilo para las etiquetas de los inputs */
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-/* Estilo para los inputs de tipo texto */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -75,7 +73,7 @@ input[type="password"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px; /* Espacio arriba de los botones */
+  margin-top: 20px; 
 }
 
 button.btn-success {

@@ -1,27 +1,13 @@
 from django.views.generic import TemplateView, FormView
-from django.http import HttpResponse
-import json
+from django.shortcuts import render
 import base64
+from django.http import HttpResponse
+from . import functions
+import json
 from django.shortcuts import redirect
-from django.core.files.storage import FileSystemStorage
 from django.urls import reverse_lazy
 from smartcook.forms import Img
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-tempURL = './temp/temp.png'
-
-fs = FileSystemStorage()
-
-
-# def saveImg(request):
-#     existente = models.TempImg.objects.get(
-#         userID=request.user)
-#     if (existente is not None):
-#         existente.image = request.FILES['image']
-#         existente.save()
-#     else:
-#         models.TempImg.objects.create(
-#             image=request.FILES['image'], userID=models.User.objects.get(pk=request.user.pk))
 
 
 class IndexView(TemplateView):
@@ -66,7 +52,9 @@ class GaleryView(LoginRequiredMixin, FormView):
             if form.is_valid():
                 image = form.cleaned_data['image']
                 data = base64.b64encode(image.read()).decode('utf-8')
-                request.session['image'] = data
+                # request.session['image'] = data
+                functions.saveImg(data)
+                functions.compress()
                 return redirect('smartcook:recognition')
         except Exception as e:
             print(e)
@@ -80,7 +68,7 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Resultados'
         context['back_url'] = self.back_url
-        context['image'] = self.request.session['image']
+        context['recipes'] = functions.GPT()
         return context
 
 
@@ -88,8 +76,19 @@ def PostImage(request):
     try:
         if request.method == 'POST':
             image = json.loads(request.body)
-            request.session['image'] = image
+            functions.saveImg(image['image'])
+            functions.compress()
             return HttpResponse(status=200)
     except Exception as e:
         print(e)
         return HttpResponse(status=500)
+
+
+def Modal(request):
+    name = request.GET.get('name')
+    description = request.GET.get('desc')
+    context = {
+        'name': name,
+        'desc': description
+    }
+    return render(request, 'components/recipe.html', context)

@@ -23,7 +23,6 @@
   </div>
   <div>
     <input type="hidden" id="token" value="{{ csrf_token }}">
-    <input type="hidden" id="user" value="{{ user.userID }}">
     {% include "components/button.html" with id="take" submit=1 icon="fa-camera" %}
     {% include "components/button.html" with class="btn btn-danger" page='smartcook:kitchen' icon="fa fa-sign-out" %}
     {% include "components/button.html" with id="savePht" submit=1 icon="fa-save" %}

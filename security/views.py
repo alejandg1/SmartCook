@@ -53,6 +53,16 @@ class LoginView(LoginView):
         context['button'] = 'Login'
         context['back_url'] = reverse_lazy('smartcook:index')
         return context
+    
+    def form_valid(self, form):
+        user = authenticate(username=form.cleaned_data['username'],
+                            password=form.cleaned_data['password'])
+        if user is not None:
+            login(self.request, user)
+            return redirect('smartcook:index')
+        else:
+            form.add_error(None, 'Error al iniciar sesiòn')
+            return super().form_valid(form)
 
 
 class LogoutView(LoginRequiredMixin, TemplateView):

@@ -4,7 +4,6 @@ from django.contrib.auth.models import (
     UserManager,
     PermissionsMixin)
 
-# Create your models here.
 
 
 class CustomUserManager(UserManager):

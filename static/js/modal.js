@@ -22,7 +22,8 @@ function modal(nombre, desc) {
 
 function unload() {
   dialog.close()
-  $('.modal-body').empty()
+  $('.modal-body').empty();
+
 }
 //
 // let save = document.querySelector('#save')

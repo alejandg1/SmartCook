@@ -15,9 +15,12 @@
     <input type="hidden" id="token" value="{{ csrf_token }}">
     <input type="hidden" id="user" value="{{ user.userID }}">
 <div class="container text-center">
+  {% comment %}
   {% for item in recipes %}
     {% include 'components/list_item.html' with bn='modal' nombre=item.name desc=item.description %}
   {% endfor %}
+    
+  {% endcomment %}
 </div>
 <dialog id="modal">
     <div class="modal-content">

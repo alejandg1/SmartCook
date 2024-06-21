@@ -1,5 +1,5 @@
 import tiktoken
-import openai
+import requests
 from django.template.loader import get_template
 import os
 import base64
@@ -60,28 +60,42 @@ class Recipe:
 
 
 def GPT():
-    # with open(directory+'compressed.jpg', 'rb') as f:
-    #     img = base64.b64encode(f.read()).decode('utf-8')
-    # print(img)
-    # text = ''
-    # key = ''
-    # rep = openai.Completion.create(
-    #     engine="gpt-4o",
-    #     prompt=text,
-    #     temperature=0.5,
-    #     max_tokens=200,
-    #     api_key=key,
-    #     imput={
-    #         "file": img,
-    #         "prompt": text,
-    #     }
-    # )
-    recipes = [
-        Recipe('Receta 1', 'Descripcion 1'),
-        Recipe('Receta 2', 'Descripcion 2'),
-        Recipe('Receta 3', 'Descripcion 3')
-    ]
-    return recipes
+    path = directory+'compressed.jpg'
+    with open(path, 'rb') as f:
+        img = base64.b64encode(f.read()).decode('utf-8')
+    prompt = 'Eres un ayudante de cocina, detecta y lista, los ingredientes de cocina que encuentras en la imagen,no listes ingredientes que no sean plenamente reconocidos, no generes ingredientes que no estén en la imagen,luego lista recetas que se puedan preparar con los ingredientes detectados, cada receta debe tener su nombre, ingredientes y pasos de preparación'
+    key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {key}"
+    }
+    payload = {
+        "model": "gpt-4o",
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": prompt
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{img}"
+                        }
+                    }
+                ]
+            }
+        ],
+        "max_tokens": 200
+    }
+    resp = requests.post(
+        "https://api.openai.com/v1/chat/completions",
+        headers=headers,
+        json=payload)
+    print(resp.json())
+    return resp.json()
 
 
 def temp():

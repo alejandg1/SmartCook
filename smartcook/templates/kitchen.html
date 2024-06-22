@@ -1,9 +1,15 @@
-{% extends "bases/base.html" %}
-
+{% extends "bases/base_form.html" %}
 {% load static %}
-{% block content %}
-<container>
-      {% include "components/button.html" with page='smartcook:galery' id='galery' icon="fa fa-picture-o" %}
-      {% include "components/button.html" with page='smartcook:camera' id='camera' icon="fa fa-camera" %}
-</container>
+{% load crispy_forms_tags %}
+{% block controls %}
+{{ form|crispy }}      
+{% endblock %}
+
+{% block extra_buttons %}
+      <div class='conten'>
+            <h5>Si no tienes una foto de tu nevera, puedes tomarla aquí:</h5>
+            <button>
+                  <a href="{% url 'smartcook:camera' %}" id="camera">Tomar foto</a>
+            </button>
+      </div>
 {% endblock %}

@@ -18,26 +18,10 @@ class HistoryView(LoginRequiredMixin, TemplateView):
     template_name = 'history.html'
 
 
-class KitchenView(LoginRequiredMixin, TemplateView):
+class KitchenView(LoginRequiredMixin, FormView):
     template_name = 'kitchen.html'
-
-
-class SearchView(LoginRequiredMixin, TemplateView):
-    template_name = 'search.html'
-
-
-class RecipeView(LoginRequiredMixin, TemplateView):
-    template_name = 'components/recipe.html'
-
-
-class CameraView(LoginRequiredMixin, TemplateView):
-    template_name = 'camera.html'
-
-
-class GaleryView(LoginRequiredMixin, FormView):
-    template_name = 'forms.html'
     form_class = Img.ImgForm
-    back_url = reverse_lazy('smartcook:kitchen')
+    back_url = reverse_lazy('smartcook:index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -58,6 +42,19 @@ class GaleryView(LoginRequiredMixin, FormView):
                 return redirect('smartcook:recognition')
         except Exception as e:
             print(e)
+
+
+
+class SearchView(LoginRequiredMixin, TemplateView):
+    template_name = 'search.html'
+
+
+class RecipeView(LoginRequiredMixin, TemplateView):
+    template_name = 'components/recipe.html'
+
+
+class CameraView(LoginRequiredMixin, TemplateView):
+    template_name = 'camera.html'
 
 
 class RecognitionView(LoginRequiredMixin, TemplateView):

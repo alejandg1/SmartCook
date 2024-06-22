@@ -3,6 +3,7 @@
 {% block Ustyles %}
   <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
   <link rel="stylesheet" href="{% static 'styles/card.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/kitchen.css' %}" />
 {% endblock %}
 {% block content %}
   <div class="form-container">
@@ -28,5 +29,9 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class='but-cont'>
+    {% block extra_buttons %}
+    {% endblock %}
   </div>
 {% endblock %}

@@ -14,6 +14,7 @@ def parse_resp(resp):
     try:
         data = resp['choices'][0]['message']['content']
         json_resp = {
+            "ingredients": [],
             "recipes": []
         }
         recetas = data.split('Ingredientes en la imagen:')
@@ -31,14 +32,25 @@ def parse_resp(resp):
             length = len(ingredientes)
             fix_list = [i for i in ingredientes if i != "" and i != " " and i]
             ingredientes = fix_list
+
             length = len(fix_list)
             for i in range(length):
                 fix_list[i] = re.sub(r'- ', '', fix_list[i])
             pasos = receta.split('**Pasos:**')[1].split('\n')
             fix_list = [i for i in pasos if i != "" and i != " " and i]
             pasos = fix_list
+
             for i in range(len(pasos)):
                 pasos[i] = re.sub(r'\d. ', '', pasos[i])
+            ingredientes = data.split('\n\n')[0].split(
+                '### Ingredientes Detectados')[1]
+            fix_list = [i for i in ingredientes.split(
+                '\n') if i != "" and i != " " and i]
+            ingredientes = fix_list
+            for i in range(len(ingredientes)):
+                ingredientes[i] = re.sub(r'\d. ', '', ingredientes[i])
+
+            json_resp['ingredients'] = ingredientes
             json_resp['recipes'].append(
                 {
                     "nombre": titulo,

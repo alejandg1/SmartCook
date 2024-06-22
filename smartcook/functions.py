@@ -121,7 +121,8 @@ def GPT():
     with open(path, 'rb') as f:
         img = base64.b64encode(f.read()).decode('utf-8')
     prompt = 'Eres un ayudante de cocina, detecta y lista, los ingredientes de cocina que encuentras en la imagen,no listes ingredientes que no sean plenamente reconocidos, no generes ingredientes que no estén en la imagen,luego lista recetas que se puedan preparar con los ingredientes detectados, cada receta debe tener su nombre, ingredientes y pasos de preparación'
-    key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
+    # key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
+    key = os.getenv('API_KEY')
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {key}"

@@ -11,22 +11,26 @@
       <h2 style="margin-left:-7px;">{{title}}</h2>
     </div>
     <div class="form-wrapper">
-      <div class="signup-form-wrapper">
-        <form method="POST" enctype="multipart/form-data" class="m-4" id="form-container">
-          {% csrf_token %}
-          {% block controls %}
+      <div class="signup-form-wrapper container">
+        <div class="container">
+          <form method="POST" enctype="multipart/form-data" class="m-4" id="form-container">
+            {% csrf_token %}
+            {% block controls %}
+            {% endblock %}
+            {% block buttons %}
+              <div class="button-container">
+              <button id="btnGrabar" class="btn btn-success" type="submit">
+                {{button}}
+              </button>
+              <a class="btn btn-danger" href="{{ back_url }}">
+                Cancelar
+              </a>
+            </div>
+            {% endblock %}
+          </form>
+          {% block canvas %}
           {% endblock %}
-          {% block buttons %}
-          <div class="button-container">
-            <button id="btnGrabar" class="btn btn-success" type="submit">
-              {{button}}
-            </button>
-            <a class="btn btn-danger" href="{{ back_url }}">
-              Cancelar
-            </a>
-          </div>
-          {% endblock %}
-        </form>
+        </div>
       </div>
     </div>
   </div>

@@ -11,5 +11,4 @@ urlpatterns = [
     path('camera/', views.CameraView.as_view(), name='camera'),
     path('recognition/', views.RecognitionView.as_view(), name='recognition'),
     path('img/', views.PostImage, name='image'),
-    path('recognition/modal/', views.Modal, name='modal'),
 ]

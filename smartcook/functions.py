@@ -1,4 +1,6 @@
 import tiktoken
+import re
+import json
 import requests
 from django.template.loader import get_template
 import os
@@ -6,6 +8,49 @@ import base64
 from PIL import Image
 
 directory = 'smartcook/media/'
+
+
+def parse_resp(resp):
+    try:
+        data = resp['choices'][0]['message']['content']
+        json_resp = {
+            "recipes": []
+        }
+        recetas = data.split('Ingredientes en la imagen:')
+        for receta in recetas:
+            if receta == '':
+                continue
+            ingredientes = receta.split('**Ingredientes:**')[1]
+            titulo = data.split(
+                '**Ingredientes:**')[0].split('\n\n')[2]
+            titulo = re.sub(r'#', '', titulo)
+            titulo = re.sub(r'\d', '', titulo)
+            titulo = re.sub(r'\.', '', titulo)
+            ingredientes = receta.split(
+                '**Ingredientes:**')[1].split('**Pasos:**')[0].split('\n')
+            length = len(ingredientes)
+            fix_list = [i for i in ingredientes if i != "" and i != " " and i]
+            ingredientes = fix_list
+            length = len(fix_list)
+            for i in range(length):
+                fix_list[i] = re.sub(r'- ', '', fix_list[i])
+            pasos = receta.split('**Pasos:**')[1].split('\n')
+            fix_list = [i for i in pasos if i != "" and i != " " and i]
+            pasos = fix_list
+            for i in range(len(pasos)):
+                pasos[i] = re.sub(r'\d. ', '', pasos[i])
+            json_resp['recipes'].append(
+                {
+                    "nombre": titulo,
+                    "ingredientes": ingredientes,
+                    "pasos": pasos
+                }
+            )
+        print(json_resp)
+        return json_resp
+    except Exception as e:
+        print(e)
+        return None, None
 
 
 def saveImg(image64):
@@ -94,8 +139,11 @@ def GPT():
         "https://api.openai.com/v1/chat/completions",
         headers=headers,
         json=payload)
-    print(resp.json())
-    return resp.json()
+    with open('response.json', 'w') as f:
+        json.dump(resp.json(), f)
+    data = parse_resp(resp.json())
+    print(data)
+    return data
 
 
 def temp():

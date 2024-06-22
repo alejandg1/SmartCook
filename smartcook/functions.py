@@ -1,4 +1,3 @@
-import tiktoken
 import re
 import json
 import requests
@@ -78,15 +77,6 @@ def saveImg(image64):
         return False
 
 
-def showTokens(img):
-    try:
-        enc = tiktoken.encoding_for_model("gpt-4o")
-        tokens = enc.encode(img)
-        print(len(tokens))
-    except Exception as e:
-        print(e)
-
-
 def compress():
     try:
         if os.path.exists(directory+'compressed.jpg'):
@@ -94,13 +84,6 @@ def compress():
         image = Image.open(directory+'image.jpg')
         quality = 40
         image.save(directory+'compressed.jpg', quality=quality)
-
-        with open(directory+'image.jpg', 'rb') as f:
-            img = base64.b64encode(f.read()).decode('utf-8')
-        with open(directory+'compressed.jpg', 'rb') as f:
-            imgC = base64.b64encode(f.read()).decode('utf-8')
-        showTokens(img)
-        showTokens(imgC)
         return True
     except Exception as e:
         print(e)

@@ -20,6 +20,8 @@
     <div class="main-container">
       {% include "components/navbar.html" %}
       <div class="container text-center"> 
+        {% block canvas %}
+        {% endblock %}
         {% block content %} 
         {% endblock %} 
       </div>

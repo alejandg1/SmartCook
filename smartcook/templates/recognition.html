@@ -11,21 +11,24 @@
     href="{% static 'styles/modal.css' %}"
   />
 {% endblock %}
+{% block canvas %}
+  <canvas class="webcam" id="canvas"></canvas>
+{% endblock %}
 {% block content %}
     <input type="hidden" id="token" value="{{ csrf_token }}">
+    <input type="hidden" id="img" value="data:image/jpeg;base64,{{ img }}">
     <input type="hidden" id="user" value="{{ user.userID }}">
 <div class="container text-center">
-  {% comment %}
-  {% for item in recipes %}
-    {% include 'components/list_item.html' with bn='modal' nombre=item.name desc=item.description %}
+  {% for item in recetas %}
+    {% include 'components/list_item.html' with bn='modal' ingredients=item.ingredients nombre=item.name desc=item.description %}
   {% endfor %}
-    
-  {% endcomment %}
 </div>
 <dialog id="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalRecetaLabel">{{name}}</h5>
+      </div>
+      <div class="modal-ingredients">
       </div>
       <div class="modal-body">
       </div>
@@ -42,6 +45,7 @@
 {% block Uscripts %}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/modal.js' %}"></script>
+  <script src="{% static 'js/recog.js' %}"></script>
 {% endblock %}
 
 

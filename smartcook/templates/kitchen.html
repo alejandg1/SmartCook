@@ -4,12 +4,17 @@
 {% block controls %}
 {{ form|crispy }}      
 {% endblock %}
-
+{% block canvas %}
+  <canvas class="webcam" id="canvas">
+{% endblock %}
 {% block extra_buttons %}
       <div class='conten'>
-            <h5>Si no tienes una foto de tu nevera, puedes tomarla aquí:</h5>
-            <button>
-                  <a href="{% url 'smartcook:camera' %}" id="camera">Tomar foto</a>
-            </button>
+           <h5>Si no tienes una foto de tu nevera, puedes tomarla aquí:</h5>
+           <button>
+              <a href="{% url 'smartcook:camera' %}" id="camera">Tomar foto</a>
+           </button>
       </div>
+{% endblock %}
+{% block Uscripts %}
+  <script src="{% static 'js/imput.js' %}"></script>
 {% endblock %}

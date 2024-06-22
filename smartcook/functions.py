@@ -93,10 +93,14 @@ def compress():
 class Recipe:
     def __init__(self, name, description):
         self.name = name
+        self.ingredients = []
         self.description = description
 
     def __str__(self):
         return self.name
+
+    def add_ingredient(self, ingredient):
+        self.ingredients.append(ingredient)
 
 
 def GPT():

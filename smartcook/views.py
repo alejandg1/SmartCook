@@ -10,6 +10,9 @@ from smartcook.forms import Img
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+imgPath = functions.directory
+
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
@@ -36,13 +39,12 @@ class KitchenView(LoginRequiredMixin, FormView):
             if form.is_valid():
                 image = form.cleaned_data['image']
                 data = base64.b64encode(image.read()).decode('utf-8')
-                # request.session['image'] = data
+                request.session['image'] = data
                 functions.saveImg(data)
                 functions.compress()
                 return redirect('smartcook:recognition')
         except Exception as e:
             print(e)
-
 
 
 class SearchView(LoginRequiredMixin, TemplateView):
@@ -65,7 +67,30 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Resultados'
         context['back_url'] = self.back_url
-        context['recipes'] = functions.GPT()
+        with open(imgPath+'image.jpg', 'rb') as f:
+            img = base64.b64encode(f.read()).decode('utf-8')
+        context['img'] = img
+        # resp = functions.GPT()
+        resp = {
+            "recipes": [
+                {
+                    "name": "Pollo con papas",
+                    "ingredients": ["pollo", "papas", "sal", "pimienta"],
+                    "description": "Delicioso pollo con papas"
+                },
+            ],
+            "ingredients": ["pollo", "papas", "sal", "pimienta"]
+
+        }
+        recipes = []
+        for i in range(len(resp['recipes'])):
+            rec = functions.Recipe(
+                resp['recipes'][i]['name'], resp['recipes'][i]['description'])
+            for j in range(len(resp['recipes'][i]['ingredients'])):
+                rec.add_ingredient(resp['recipes'][i]['ingredients'][j])
+            recipes.append(rec)
+        context['recetas'] = recipes
+        context['inredientes'] = resp['ingredients']
         return context
 
 
@@ -75,17 +100,17 @@ def PostImage(request):
             image = json.loads(request.body)
             functions.saveImg(image['image'])
             functions.compress()
+            request.session['image'] = image['image']
             return HttpResponse(status=200)
     except Exception as e:
         print(e)
         return HttpResponse(status=500)
 
-
-def Modal(request):
-    name = request.GET.get('name')
-    description = request.GET.get('desc')
-    context = {
-        'name': name,
-        'desc': description
-    }
-    return render(request, 'components/recipe.html', context)
+        # def Modal(request):
+        #     name = request.GET.get('name')
+        #     description = request.GET.get('desc')
+        #     context = {
+        #         'name': name,
+        #         'desc': description
+        #     }
+        # return render(request, 'components/recipe.html', context)

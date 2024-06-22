@@ -53,7 +53,7 @@ class LoginView(LoginView):
         context['button'] = 'Login'
         context['back_url'] = reverse_lazy('smartcook:index')
         return context
-    
+
     def form_valid(self, form):
         user = authenticate(username=form.cleaned_data['username'],
                             password=form.cleaned_data['password'])

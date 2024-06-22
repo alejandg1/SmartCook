@@ -9,15 +9,17 @@
 }
 
 .webcam {
+  margin: 10px;
   height: 420px;
   width: 308px;
   border: 5px solid;
   border-radius: 10px;
-  border-color: black;
+  border-color: #326c72;
 }
 
-.buttons{
-  height: 420px;
-  width: 420px;
-
+.btn-camera {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 13px;
 }

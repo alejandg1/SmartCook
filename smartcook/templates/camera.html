@@ -12,18 +12,15 @@
 {% block content %}
 <div class="container text-center">
   <div class="columns justify-content-md-center">
-  <div class="justify-content-md-center">
-	  	<select name="list" id="list"></select>
-	</div>
   <div>
     <video id="divcam" class="webcam"></video>
     <canvas class="webcam" id="canvas">
       <img src="",alt="photo"></img>
     </canvas>
   </div>
-  <div>
+  <div class='btn-camera'>
     <input type="hidden" id="token" value="{{ csrf_token }}">
-    {% include "components/button.html" with id="take" submit=1 icon="fa-camera" %}
+    {% include "components/button.html" with id="take" submit=1 class='btn btn-info' icon="fa-camera" %}
     {% include "components/button.html" with class="btn btn-danger" page='smartcook:kitchen' icon="fa fa-sign-out" %}
     {% include "components/button.html" with id="savePht" submit=1 icon="fa-save" %}
   </div>

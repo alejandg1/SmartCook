@@ -1,4 +1,7 @@
 venv/
+test.py
+parsed.json
+response.json
 __pycache__/
 entr/
 EntConsAI/

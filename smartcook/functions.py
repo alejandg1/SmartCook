@@ -16,34 +16,42 @@ def parse_resp(resp):
             "ingredients": [],
             "recipes": []
         }
-        recetas = data.split('Ingredientes en la imagen:')
-        fix_list = [i for i in recetas if i != "" and i != " " and i]
+        recetas = data.split('### Recetas')[1].split('*Nombre:*')
+        fix_list = [i for i in recetas if i !=
+                    "" and i != " " and i and i != '\n\n']
         recetas = fix_list
         for receta in recetas:
             if receta == '':
                 continue
             titulo = data.split(
-                '**Ingredientes:**')[0].split('\n\n')[2]
+                '*Ingredientes:*')[0].split('*Nombre:*')[1]
             titulo = re.sub(r'#', '', titulo)
             titulo = re.sub(r'\d', '', titulo)
             titulo = re.sub(r'\.', '', titulo)
 
-            ingredientes = receta.split('**Ingredientes:**')[1]
+            ingredientes = receta.split('*Ingredientes:*')[0]
             ingredientes = re.sub(r'- ', '', ingredientes)
-            ingredientes = ingredientes.split('**Pasos:**')[0].split('\n')
-            fix_list = [i for i in ingredientes if i != "" and i != " " and i]
+            ingredientes = ingredientes.split('\n')
+            fix_list = [i for i in ingredientes if i !=
+                        "" and i != " " and i and '#' not in i and '*' not in i]
             ingredientes = fix_list
 
-            pasos = receta.split('**Pasos:**')[1]
+            pasos = receta.split('*Pasos:*')[1]
             pasos = re.sub(r'\d. ', '', pasos)
             pasos = pasos.split('\n')
-            fix_list = [i for i in pasos if i != "" and i != " " and i]
+            fix_list = [i for i in pasos if i !=
+                        "" and i != " " and i and i != '**']
             pasos = fix_list
+            print(pasos)
 
             detected = data.split('\n\n')[0]
-            detected = re.sub(r'Ingredientes en la imagen:\n', '', detected)
+            detected = re.sub(r'- ', '', detected)
+            detected = re.sub(r'### Ingredientes', '', detected)
             detected = re.sub(r'\d. ', '', detected)
             detected = detected.split('\n')
+            fix_list = [i for i in detected if i != "" and i !=
+                        " " and i and i != '*Ingredientes*' and i != '*ingredientes*']
+            detected = fix_list
 
             json_resp['ingredients'] = detected
             json_resp['recipes'].append(
@@ -85,6 +93,7 @@ def compress():
         print(e)
         return None
 
+
 class Recipe:
     def __init__(self, name, description):
         self.name = name
@@ -102,9 +111,8 @@ def GPT():
     path = directory+'compressed.jpg'
     with open(path, 'rb') as f:
         img = base64.b64encode(f.read()).decode('utf-8')
-    prompt = 'Eres un ayudante de cocina, detecta y lista, los ingredientes de cocina que encuentras en la imagen,no listes ingredientes que no sean plenamente reconocidos, no generes ingredientes que no estén en la imagen,luego lista recetas que se puedan preparar con los ingredientes detectados, cada receta debe tener su nombre, ingredientes y pasos de preparación'
-    # key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
-    key = os.getenv('API_KEY')
+    prompt = 'Eres un ayudante de cocina, detecta y lista, los ingredientes de cocina que encuentras en la imagen,no listes ingredientes que no sean plenamente reconocidos, no generes ingredientes que no estén en la imagen,luego lista recetas que se puedan preparar con los ingredientes detectados, cada receta debe tener su nombre, ingredientes y pasos de preparación, las cabeceras deben ser: ingredientes,recetas,nombre,pasos, solo el encabezado recetas y el encabezado ingredientes deben estar como H3, las partes de cada receta deben marcarse de esta forma: *nombre*, el resto del texto debe ser texto corriente'
+    key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {key}"
@@ -128,6 +136,7 @@ def GPT():
                 ]
             }
         ],
+        "temperature": 0.3,
         "max_tokens": 200
     }
     resp = requests.post(

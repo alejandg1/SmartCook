@@ -22,6 +22,7 @@ class HistoryView(LoginRequiredMixin, TemplateView):
     template_name = 'history.html'
 
     def get_context_data(self, **kwargs):
+        fixed = []
         context = super().get_context_data(**kwargs)
         hist = Historial.objects.get(user=self.request.user)
         recetas = DetHistorial.objects.filter(histID=hist.histID)
@@ -34,8 +35,12 @@ class HistoryView(LoginRequiredMixin, TemplateView):
                 'ingredientes': ingredientes,
                 'pasos': pasos
             }
-            fixed = []
+            print(receta)
             fixed.append(receta)
+
+        if fixed == []:
+            context['recetas'] = [{'nombre': 'No hay recetas guardadas'}]
+            return context
         context['recetas'] = fixed
         return context
 
@@ -93,10 +98,15 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         recipes = []
         with open('smartcook/../response.json', 'r') as f:
             resp = json.load(f)
+        resp = functions.GPT()
+        # with open(imgPath+'response.json', 'w') as f:
+        #     json.dump(resp, f)
+        with open('smartcook/../response.json', 'r') as f:
+            resp = json.load(f)
         resp = functions.parse_resp(resp)
-        # resp = functions.GPT()
+        print(resp)
 
-        for i in (resp['recipes']):
+        for i in resp['recipes']:
             rec = functions.Recipe(
                 i['nombre'], i['pasos'])
             for j in i['ingredientes']:

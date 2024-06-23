@@ -1,14 +1,18 @@
+let ActualRecipe = {
+  'Receta': "",
+  'Instrucciones': "",
+  'Ingredientes': ""
+}
 let nombre
 let desc
 let ingredients
-let token = document.getElementById("token").value
-let user = document.getElementById("user").value
+let token = document.getElementById("token").value 
 document.getElementsByName('modal').forEach(function(e) {
   e.addEventListener('click', function() {
     nombre = e.getAttribute('data-name')
     desc = e.getAttribute('data-description')
     ingredients = e.getAttribute('data-ingredients')
-    modal(nombre, desc)
+    modal()
   })
 })
 
@@ -27,7 +31,7 @@ function parseList(list) {
   return parsedList
 }
 
-function modal(nombre, desc) {
+function modal() {
   dialog.showModal()
   $('.modal-title').text(nombre)
   desc = parseList(desc)
@@ -37,6 +41,9 @@ function modal(nombre, desc) {
     body.textContent = desc[i]
     $('.modal-body').append(body)
   }
+  ActualRecipe.Receta = nombre
+  ActualRecipe.Instrucciones = desc.join(',')
+  ActualRecipe.Ingredientes = ingredients.join(',')
   for (i in ingredients) {
     let body = document.createElement('li')
     body.textContent = ingredients[i]
@@ -49,3 +56,23 @@ function unload() {
   $('.modal-body').empty();
 
 }
+// let url = "http://localhost:8000/"
+let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/"
+
+let send = document.getElementById('send')
+send.addEventListener('click', async () => {
+  let resp = await fetch(url + "user/save/", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      "X-csrftoken": token
+    },
+    body: JSON.stringify(ActualRecipe)
+  })
+  if (resp.ok) {
+    dialog.close()
+  }
+  else {
+    alert("No se ha podido guardar en el historial")
+  }
+})

@@ -1,9 +1,12 @@
 from django.views.generic import TemplateView, CreateView, UpdateView
+import json
 from django.shortcuts import redirect
+from django import http
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from security.models import User
+from smartcook.models import Historial, DetHistorial
 from django.contrib.auth.views import LoginView
 from security.forms import forms
 
@@ -96,6 +99,7 @@ class SingUpView(CreateView):
                             password=form.cleaned_data['password1'])
         if user is not None:
             login(self.request, user)
+            Historial.objects.create(user=user)
             return redirect(self.success_url)
         else:
             form.add_error(None, 'Error al iniciar sesión')
@@ -105,3 +109,17 @@ class SingUpView(CreateView):
         if request.user.is_authenticated:
             return redirect('smartcook:index')
         return super().dispatch(request, *args, **kwargs)
+
+
+def SaveDetHist(request):
+    if request.method == 'POST':
+        req = json.loads(request.body)
+        print(req)
+        hist = Historial.objects.get(user=request.user)
+        DetHistorial.objects.create(histID=hist,
+                                    Recipe=req['Receta'],
+                                    Instructions=req['Instrucciones'],
+                                    Ingredients=req['Ingredientes']
+                                    )
+        return http.HttpResponse('ok')
+    return redirect('smartcook:history')

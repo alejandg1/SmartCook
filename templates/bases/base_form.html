@@ -12,7 +12,8 @@
     <div class="form-wrapper">
       <div class="signup-form-wrapper">
         <div class="container">
-          <form method="POST" enctype="multipart/form-data" class="m-4" id="form-container">
+          <div class="row">
+          <form method="POST" enctype="multipart/form-data" class="col-sm m-4" id="form-container">
             {% csrf_token %}
             {% block controls %}
             {% endblock %}
@@ -27,7 +28,8 @@
               </div>
             {% endblock %}
           </form>
-          <canvas class="webcam hidden" id="canvas"></canvas>
+          <canvas class="col-sm webcam hidden" id="canvas"></canvas>
+        </div>
         </div>
         <div class="but-cont">
           {% block extra_buttons %}

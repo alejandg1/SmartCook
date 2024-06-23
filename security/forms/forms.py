@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserChangeForm
 
 
 class EditForm(UserChangeForm):
+    password = None
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name',
@@ -37,4 +39,8 @@ class SingupForm(UserCreationForm):
             'password1': 'Contraseña',
             'password2': 'Confirmar contraseña'
         }
-        
+
+    def __init__(self, *args, **kwargs):
+        super(SingupForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].help_text = None
+        self.fields['password2'].help_text = None

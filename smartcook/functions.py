@@ -17,39 +17,35 @@ def parse_resp(resp):
             "recipes": []
         }
         recetas = data.split('Ingredientes en la imagen:')
+        fix_list = [i for i in recetas if i != "" and i != " " and i]
+        recetas = fix_list
         for receta in recetas:
             if receta == '':
                 continue
-            ingredientes = receta.split('**Ingredientes:**')[1]
             titulo = data.split(
                 '**Ingredientes:**')[0].split('\n\n')[2]
             titulo = re.sub(r'#', '', titulo)
             titulo = re.sub(r'\d', '', titulo)
             titulo = re.sub(r'\.', '', titulo)
-            ingredientes = receta.split(
-                '**Ingredientes:**')[1].split('**Pasos:**')[0].split('\n')
-            length = len(ingredientes)
+
+            ingredientes = receta.split('**Ingredientes:**')[1]
+            ingredientes = re.sub(r'- ', '', ingredientes)
+            ingredientes = ingredientes.split('**Pasos:**')[0].split('\n')
             fix_list = [i for i in ingredientes if i != "" and i != " " and i]
             ingredientes = fix_list
 
-            length = len(fix_list)
-            for i in range(length):
-                fix_list[i] = re.sub(r'- ', '', fix_list[i])
-            pasos = receta.split('**Pasos:**')[1].split('\n')
+            pasos = receta.split('**Pasos:**')[1]
+            pasos = re.sub(r'\d. ', '', pasos)
+            pasos = pasos.split('\n')
             fix_list = [i for i in pasos if i != "" and i != " " and i]
             pasos = fix_list
 
-            for i in range(len(pasos)):
-                pasos[i] = re.sub(r'\d. ', '', pasos[i])
-            ingredientes = data.split('\n\n')[0].split(
-                '### Ingredientes Detectados')[1]
-            fix_list = [i for i in ingredientes.split(
-                '\n') if i != "" and i != " " and i]
-            ingredientes = fix_list
-            for i in range(len(ingredientes)):
-                ingredientes[i] = re.sub(r'\d. ', '', ingredientes[i])
+            detected = data.split('\n\n')[0]
+            detected = re.sub(r'Ingredientes en la imagen:\n', '', detected)
+            detected = re.sub(r'\d. ', '', detected)
+            detected = detected.split('\n')
 
-            json_resp['ingredients'] = ingredientes
+            json_resp['ingredients'] = detected
             json_resp['recipes'].append(
                 {
                     "nombre": titulo,
@@ -57,9 +53,9 @@ def parse_resp(resp):
                     "pasos": pasos
                 }
             )
-        print(json_resp)
         return json_resp
     except Exception as e:
+        print("error")
         print(e)
         return None, None
 

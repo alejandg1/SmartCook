@@ -10,12 +10,21 @@
   {% block controls %}
   {{ form|crispy }}     
   {% endblock %}
-  {% block extra_buttons %}
-    <h5>Si no tienes una foto de tu nevera, puedes tomarla aquí:</h5>
-    <button>
+
+  {% block buttons %}
+     <div class="button-container">
+     <button id="btnGrabar" class="btn btn-success" type="submit">
+         {{button}}
+     </button>
+     <a class="btn btn-danger" href="{{ back_url }}">
+         Cancelar
+    </a>
+    </div>
+    <p>Si no tienes una foto de tu nevera, puedes tomarla aquí:</p>
+    <button class="btn btn-primary">
         <a href="{% url 'smartcook:camera' %}" id="camera">Tomar foto</a>
     </button>
-  {% endblock %} 
+  {% endblock %}
   {% block Uscripts %}
     <script src="{% static 'js/imput.js' %}"></script>
   {% endblock %}

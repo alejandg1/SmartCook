@@ -19,6 +19,9 @@
     <input type="hidden" id="img" value="data:image/jpeg;base64,{{ img }}">
     <input type="hidden" id="user" value="{{ user.userID }}">
 <div class="container text-center">
+  {% for i in ingredients %}
+  <p> {{i}}</p>
+  {% endfor %}
   {% for item in recetas %}
     {% include 'components/list_item.html' with bn='modal' ingredients=item.ingredients nombre=item.name desc=item.description %}
   {% endfor %}

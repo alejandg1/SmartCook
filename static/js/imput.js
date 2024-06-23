@@ -5,19 +5,19 @@ function drawImage(canvas, img, width, height) {
   context.drawImage(img, 0, 0, canvas.width, canvas.height);
 }
 
-canvas = document.getElementById("canvas")
-imput = document.getElementById("id_image")
+let canvas = document.getElementById("canvas");
+let input = document.getElementById("id_image");
 
-imput.addEventListener("change", () => {
-  let file = imput.files[0]
-  let reader = new FileReader()
-  reader.readAsDataURL(file)
+input.addEventListener("change", () => {
+  let file = input.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
   reader.onload = () => {
-    let img = new Image()
-    img.src = reader.result
+    let img = new Image();
+    img.src = reader.result;
     img.onload = () => {
-      drawImage(canvas, img, 400, 300)
-    }
-  }
-})
-
+      drawImage(canvas, img, 250, 250);
+      canvas.classList.remove("hidden");  // Muestra el canvas cuando se carga una imagen
+    };
+  };
+});

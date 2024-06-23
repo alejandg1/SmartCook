@@ -1,17 +1,23 @@
 {% extends "bases/base_form.html" %}
 {% load static %}
+{% block Ustyles %}
+  <link rel="stylesheet" href="{% static 'styles/form.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/card.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/kitchen.css' %}" />
+{% endblock %}
 {% load crispy_forms_tags %}
-{% block controls %}
-{{ form|crispy }}      
-{% endblock %}
-{% block extra_buttons %}
-      <div class='conten'>
-           <h5>Si no tienes una foto de tu nevera, puedes tomarla aquí:</h5>
-           <button>
-              <a href="{% url 'smartcook:camera' %}" id="camera">Tomar foto</a>
-           </button>
-      </div>
-{% endblock %}
-{% block Uscripts %}
-  <script src="{% static 'js/imput.js' %}"></script>
-{% endblock %}
+<div class='cont_form_img'>
+  {% block controls %}
+  {{ form|crispy }}     
+  {% endblock %}
+  {% block extra_buttons %}
+    <h5>Si no tienes una foto de tu nevera, puedes tomarla aquí:</h5>
+    <button>
+        <a href="{% url 'smartcook:camera' %}" id="camera">Tomar foto</a>
+    </button>
+  {% endblock %} 
+  {% block Uscripts %}
+    <script src="{% static 'js/imput.js' %}"></script>
+  {% endblock %}
+</div>
+

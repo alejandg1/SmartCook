@@ -9,10 +9,6 @@ canvas{
     border-radius: 20px;
 }
 .Container_recetas{
-    max-width: 300px; /* Ancho máximo del modal */
-    margin: auto; /* Centrar el modal horizontalmente */
-}
-
-.Container_recetas .list item{
-    font-size: 1px !important; /* Ajusta este valor según el tamaño que desees */
+    max-width: 300px; 
+    margin: auto; 
 }

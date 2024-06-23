@@ -43,9 +43,10 @@
     height: 2em;
 }
 
-.list .title {
-    font-size: 1.2em;
-    margin: 0.5em;
+.Container_recetas .list h3.titulo {
+    font-size: 16px;
+    margin: 0.5em 0;
+    font-weight: normal;
 }
 
 .list .accion {

@@ -17,7 +17,7 @@ input.addEventListener("change", () => {
     img.src = reader.result;
     img.onload = () => {
       drawImage(canvas, img, 250, 250);
-      canvas.classList.remove("hidden");  // Muestra el canvas cuando se carga una imagen
+      canvas.classList.remove("hidden");
     };
   };
 });

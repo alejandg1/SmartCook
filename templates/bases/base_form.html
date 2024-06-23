@@ -12,24 +12,28 @@
     <div class="form-wrapper">
       <div class="signup-form-wrapper">
         <div class="container">
-          <div class="row">
-          <form method="POST" enctype="multipart/form-data" class="col-sm m-4" id="form-container">
-            {% csrf_token %}
-            {% block controls %}
-            {% endblock %}
-            {% block buttons %}
-              <div class="button-container">
-                <button id="btnGrabar" class="btn btn-success" type="submit">
-                  {{button}}
-                </button>
-                <a class="btn btn-danger" href="{{ back_url }}">
-                  Cancelar
-                </a>
-              </div>
-            {% endblock %}
-          </form>
-          <canvas class="col-sm webcam hidden" id="canvas"></canvas>
-        </div>
+          <div class="form-canvas-container">
+            <div class="form-column">
+              <form method="POST" enctype="multipart/form-data" id="form-container">
+                {% csrf_token %}
+                {% block controls %}
+                {% endblock %}
+                {% block buttons %}
+                  <div class="button-container">
+                    <button id="btnGrabar" class="btn btn-success" type="submit">
+                      {{button}}
+                    </button>
+                    <a class="btn btn-danger" href="{{ back_url }}">
+                      Cancelar
+                    </a>
+                  </div>
+                {% endblock %}
+              </form>
+            </div>
+            <div class="canvas-column">
+              <canvas class="webcam hidden" id="canvas"></canvas>
+            </div>
+          </div>
         </div>
         <div class="but-cont">
           {% block extra_buttons %}

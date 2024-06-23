@@ -13,8 +13,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 400px;
 }
 
 .hidden{
@@ -25,6 +24,7 @@ form {
   display: flex;
   flex-direction: column; 
   align-items: center; 
+  width: 400px;
 }
 
 .section-title {
@@ -45,6 +45,7 @@ form {
   align-items: center; 
   padding: 5px;
   box-sizing: border-box;
+  width: 500px; 
 }
 
 .signup-form-wrapper {

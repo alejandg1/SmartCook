@@ -7,13 +7,7 @@ form {
   background-color: #ccc;
   box-sizing: border-box;
   text-align: left;
-  
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 400px;
+
 }
 
 .hidden{
@@ -23,9 +17,9 @@ form {
 #form-container {
   display: flex;
   flex-direction: column; 
-  align-items: center; 
-  width: 400px;
+  width: 380px;
 }
+
 
 .section-title {
   width: 100%;
@@ -52,6 +46,8 @@ form {
   max-height: 500px; 
   overflow-y: auto; 
   box-sizing: border-box; 
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
 }
 
 
@@ -60,22 +56,20 @@ form {
   background: transparent; 
 }
 
-.signup-form-wrapper {
-  -ms-overflow-style: none;
-  scrollbar-width: none; 
-}
 
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  margin-left: 17px;
 }
+
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
-  padding: 10px;
+  margin-left: 17px;
+  width: 90%;
   border: 1px solid #ccc;
   border-radius: 3px;
   box-sizing: border-box;

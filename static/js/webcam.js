@@ -1,3 +1,10 @@
+function drawImage(canvas, img, width, height) {
+  let context = canvas.getContext("2d");
+  canvas.width = width;
+  canvas.height = height;
+  context.drawImage(img, 0, 0, canvas.width, canvas.height);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   let videoDiv = document.getElementById("divcam")
   let canvas = document.getElementById("canvas")
@@ -20,10 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("take").addEventListener("click", () => {
     videoDiv.pause();
-    let contexto = canvas.getContext("2d");
-    canvas.width = videoDiv.videoWidth;
-    canvas.height = videoDiv.videoHeight;
-    contexto.drawImage(videoDiv, 0, 0, canvas.width, canvas.height);
+    drawImage(canvas, videoDiv, videoDiv.videoWidth, videoDiv.videoHeight);
+    // let contexto = canvas.getContext("2d");
+    // canvas.width = videoDiv.videoWidth;
+    // canvas.height = videoDiv.videoHeight;
+    // contexto.drawImage(videoDiv, 0, 0, canvas.width, canvas.height);
     let foto = canvas.toDataURL('media/image.png');
     videoDiv.play();
     img = foto

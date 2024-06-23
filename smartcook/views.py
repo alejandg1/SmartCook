@@ -1,5 +1,4 @@
 from django.views.generic import TemplateView, FormView
-from django.shortcuts import render
 import base64
 from django.http import HttpResponse
 from . import functions
@@ -8,6 +7,9 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from smartcook.forms import Img
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+imgPath = functions.directory
 
 
 class IndexView(TemplateView):
@@ -36,13 +38,12 @@ class KitchenView(LoginRequiredMixin, FormView):
             if form.is_valid():
                 image = form.cleaned_data['image']
                 data = base64.b64encode(image.read()).decode('utf-8')
-                # request.session['image'] = data
+                request.session['image'] = data
                 functions.saveImg(data)
                 functions.compress()
                 return redirect('smartcook:recognition')
         except Exception as e:
             print(e)
-
 
 
 class SearchView(LoginRequiredMixin, TemplateView):
@@ -65,7 +66,25 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Resultados'
         context['back_url'] = self.back_url
-        context['recipes'] = functions.GPT()
+        with open(imgPath+'image.jpg', 'rb') as f:
+            img = base64.b64encode(f.read()).decode('utf-8')
+        context['img'] = img
+
+        recipes = []
+        with open('smartcook/../response.json', 'r') as f:
+            resp = json.load(f)
+        resp = functions.parse_resp(resp)
+        # resp = functions.GPT()
+
+        for i in (resp['recipes']):
+            print(i)
+            rec = functions.Recipe(
+                i['nombre'], i['pasos'])
+            for j in i['ingredientes']:
+                rec.add_ingredient(j)
+            recipes.append(rec)
+        context['recetas'] = recipes
+        context['ingredientes'] = resp['ingredients']
         return context
 
 
@@ -75,17 +94,8 @@ def PostImage(request):
             image = json.loads(request.body)
             functions.saveImg(image['image'])
             functions.compress()
+            request.session['image'] = image['image']
             return HttpResponse(status=200)
     except Exception as e:
         print(e)
         return HttpResponse(status=500)
-
-
-def Modal(request):
-    name = request.GET.get('name')
-    description = request.GET.get('desc')
-    context = {
-        'name': name,
-        'desc': description
-    }
-    return render(request, 'components/recipe.html', context)

@@ -1,7 +1,18 @@
-
 dialog{
   max-width: 500px;
+  border-radius: 10px;
+  scrollbar-width: none;
   border: 0px ;
+}
+ul{
+  list-style-type: none;
+}
+
+.ingr{
+  color: #fff;
+}
+h4{
+  color: #fff;
 }
 
 ::backdrop {

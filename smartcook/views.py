@@ -1,4 +1,6 @@
 from django.views.generic import TemplateView, FormView
+from security.models import User
+from smartcook.models import Historial, DetHistorial
 import base64
 from django.http import HttpResponse
 from . import functions
@@ -18,6 +20,24 @@ class IndexView(TemplateView):
 
 class HistoryView(LoginRequiredMixin, TemplateView):
     template_name = 'history.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        hist = Historial.objects.get(user=self.request.user)
+        recetas = DetHistorial.objects.filter(histID=hist.histID)
+        for rec in recetas:
+            nombre = rec.Recipe
+            ingredientes = rec.Ingredients.split(',')
+            pasos = rec.Instructions.split(',')
+            receta = {
+                'nombre': nombre,
+                'ingredientes': ingredientes,
+                'pasos': pasos
+            }
+            fixed = []
+            fixed.append(receta)
+        context['recetas'] = fixed
+        return context
 
 
 class KitchenView(LoginRequiredMixin, FormView):
@@ -77,7 +97,6 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         # resp = functions.GPT()
 
         for i in (resp['recipes']):
-            print(i)
             rec = functions.Recipe(
                 i['nombre'], i['pasos'])
             for j in i['ingredientes']:

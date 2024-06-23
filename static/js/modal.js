@@ -14,19 +14,34 @@ document.getElementsByName('modal').forEach(function(e) {
 
 let dialog = document.querySelector('#modal')
 
+function parseList(list) {
+  list = list.replace(/['\[\]]/g, '')
+  let parsed = list.split(',')
+  parsed = parsed.filter((item) => {
+    return item !== ''
+  })
+  let parsedList = []
+  for (i in parsed) {
+    parsedList.push(parsed[i].trim())
+  }
+  return parsedList
+}
+
 function modal(nombre, desc) {
   dialog.showModal()
   $('.modal-title').text(nombre)
-  let body = document.createElement('p')
-  let ingred = document.createElement('p')
-  for (let i = 0; i < ingredients.length; i++) {
-    let ing = document.createElement('p')
-    ing.textContent = ingredients[i]
-    $('.modal-body').append(ing)
+  desc = parseList(desc)
+  ingredients = parseList(ingredients)
+  for (i in desc) {
+    let body = document.createElement('li')
+    body.textContent = desc[i]
+    $('.modal-body').append(body)
   }
-  body.textContent = desc
-  ingred.textContent = desc
-  $('.modal-body').append(body)
+  for (i in ingredients) {
+    let body = document.createElement('li')
+    body.textContent = ingredients[i]
+    $('.modal-ingredients').append(body)
+  }
 }
 
 function unload() {

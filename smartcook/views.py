@@ -69,25 +69,22 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         with open(imgPath+'image.jpg', 'rb') as f:
             img = base64.b64encode(f.read()).decode('utf-8')
         context['img'] = img
-        # resp = functions.GPT()
+
+        recipes = []
         with open('smartcook/../response.json', 'r') as f:
             resp = json.load(f)
         resp = functions.parse_resp(resp)
-        with open('smartcook/../parsed.json', 'w') as f:
-            json.dump(resp, f)
-        # recipes = []
-        context['recetas'] = resp['recipes']
+        # resp = functions.GPT()
+
+        for i in (resp['recipes']):
+            print(i)
+            rec = functions.Recipe(
+                i['nombre'], i['pasos'])
+            for j in i['ingredientes']:
+                rec.add_ingredient(j)
+            recipes.append(rec)
+        context['recetas'] = recipes
         context['ingredientes'] = resp['ingredients']
-        print(context['recetas'])
-        print(context['ingredientes'])
-        # for i in range(len(resp['recipes'])):
-        #     rec = functions.Recipe(
-        #         resp['recipes'][i]['name'], resp['recipes'][i]['description'])
-        #     for j in range(len(resp['recipes'][i]['ingredients'])):
-        #         rec.add_ingredient(resp['recipes'][i]['ingredients'][j])
-        #     recipes.append(rec)
-        # context['recetas'] = recipes
-        # context['inredientes'] = resp['ingredients']
         return context
 
 

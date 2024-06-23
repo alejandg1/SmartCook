@@ -19,22 +19,32 @@
     <input type="hidden" id="img" value="data:image/jpeg;base64,{{ img }}">
     <input type="hidden" id="user" value="{{ user.userID }}">
 <div class="container text-center">
-  {% for i in ingredients %}
-  <p> {{i}}</p>
-  {% endfor %}
-  {% for item in recetas %}
-    {% include 'components/list_item.html' with bn='modal' ingredients=item.ingredients nombre=item.name desc=item.description %}
-  {% endfor %}
+  <div class="row">
+    <ul class="list-group-flush row-sm">
+        <h4>Ingredientes Detectados</h4>
+        {% for item in ingredientes %}
+          <li class="ingr">{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <div class="row-sm">
+        <h4>Recetas</h4>
+        {% for item in recetas %}
+          {% include 'components/list_item.html' with bn='modal' ingredients=item.ingredients nombre=item.name desc=item.description %}
+        {% endfor %}
+    </div>
+  </div>
 </div>
 <dialog id="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalRecetaLabel">{{name}}</h5>
       </div>
-      <div class="modal-ingredients">
-      </div>
-      <div class="modal-body">
-      </div>
+      <h3>Ingredientes</h3>
+      <ul class="modal-ingredients">
+      </ul>
+      <h3>Pasos</h3>
+      <ol class="modal-body">
+      </ol>
       <div class="modal-footer">
       {% include "components/button.html" with submit=1 type="submit" icon="fa-save" %}
       {% include "components/button.html" with submit=1 class="btn btn-danger" onclick='unload()' icon="fa fa-sign-out" %}

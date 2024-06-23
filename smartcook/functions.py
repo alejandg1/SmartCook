@@ -85,7 +85,6 @@ def compress():
         print(e)
         return None
 
-
 class Recipe:
     def __init__(self, name, description):
         self.name = name

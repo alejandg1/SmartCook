@@ -15,7 +15,10 @@ ALLOWED_HOSTS = ['*']
 
 ALLOWED_ORIGINS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000',
+                        'https://smartcook.up.railway.app',
+                        'http://172.0.0.1:8000'
+                        ]
 
 INSTALLED_APPS = [
     'crispy_forms',

@@ -114,12 +114,22 @@ class SingUpView(CreateView):
 def SaveDetHist(request):
     if request.method == 'POST':
         req = json.loads(request.body)
-        print(req)
         hist = Historial.objects.get(user=request.user)
         DetHistorial.objects.create(histID=hist,
                                     Recipe=req['Receta'],
                                     Instructions=req['Instrucciones'],
                                     Ingredients=req['Ingredientes']
                                     )
+        return http.HttpResponse('ok')
+    return redirect('smartcook:history')
+
+
+def RmDetHist(request):
+    if request.method == 'POST':
+        req = json.loads(request.body)
+        receta = req['nombre']
+        user = request.user
+        hist = Historial.objects.get(user=user)
+        DetHistorial.objects.filter(histID=hist, Recipe=receta).delete()
         return http.HttpResponse('ok')
     return redirect('smartcook:history')

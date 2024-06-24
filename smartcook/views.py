@@ -39,7 +39,7 @@ class HistoryView(LoginRequiredMixin, TemplateView):
             fixed.append(receta)
 
         if fixed == []:
-            context['recetas'] = [{'nombre': 'No hay recetas guardadas'}]
+            context['recetas'] = [{'nombre': 'sin recetas disponibles'}]
             return context
         context['recetas'] = fixed
         return context

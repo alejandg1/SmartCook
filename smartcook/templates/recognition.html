@@ -2,37 +2,38 @@
 {% load static %}
 
 {% block Ustyles %}
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/listItem.css' %}"
-  />
-  <link
-    rel="stylesheet"
-    href="{% static 'styles/modal.css' %}"
-  />
+  <link rel="stylesheet" href="{% static 'styles/recognition.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/listItem.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/modal.css' %}" />
 {% endblock %}
+
 {% block canvas %}
   <canvas class="webcam" id="canvas"></canvas>
 {% endblock %}
+
 {% block content %}
-    <input type="hidden" id="token" value="{{ csrf_token }}">
-    <input type="hidden" id="img" value="data:image/jpeg;base64,{{ img }}">
-<div class="container text-center">
-  <div class="row">
-    <ul class="list-group-flush row-sm">
-        <h4>Ingredientes Detectados</h4>
+  <input type="hidden" id="token" value="{{ csrf_token }}">
+  <input type="hidden" id="img" value="data:image/jpeg;base64,{{ img }}">
+  
+  <div class="container text-center">
+    <div class="row">
+      <ul class="list-group-flush row-sm">
+        <h2>Ingredientes Detectados</h2>
         {% for item in ingredientes %}
           <li class="ingr">{{ item }}</li>
         {% endfor %}
-    </ul>
-    <div class="row-sm">
-        <h4>Recetas</h4>
-        {% for item in recetas %}
+      </ul>
+      <div class="row-sm">
+        <h3>Recetas</h3>
+        <div class="Container_recetas">
+          {% for  item in recetas %}
           {% include 'components/list_item.html' with bn='modal' ingredients=item.ingredients nombre=item.name desc=item.description %}
-        {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
 <dialog id="modal">
     <div class="modal-content">
       <div class="modal-header">

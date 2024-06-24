@@ -37,7 +37,7 @@ class EditView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['back_url'] = reverse_lazy('security:profile')
-        context['title'] = 'editar usuario'
+        context['title'] = 'Editar usuario'
         context['button'] = 'Guardar'
         return context
 

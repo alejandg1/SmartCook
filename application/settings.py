@@ -1,3 +1,4 @@
+import mimetypes
 from pathlib import Path
 import os
 
@@ -8,11 +9,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)pts(%0!ibqd^-h5m6+d*-53bdixr)izrf28i20+0+to3+0o=e'
 
 DEBUG = False
-
+mimetypes.add_type("text/css", ".css", True)
 
 ALLOWED_HOSTS = ['*']
 
-ALLOWED_ORIGINS = ['https://smartcook.up.railway.app', 'http://localhost:8000']
+ALLOWED_ORIGINS = ['*']
 
 INSTALLED_APPS = [
     'crispy_forms',

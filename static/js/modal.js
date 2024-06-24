@@ -35,22 +35,30 @@ function modal() {
   $('.modal-ingredients').empty()
   dialog.showModal()
   $('.modal-title').text(nombre)
-  desc = parseList(desc)
-  ingredients = parseList(ingredients)
-  for (i in desc) {
-    if (desc[i] != '**') {
-      let body = document.createElement('li')
-      body.textContent = desc[i]
-      $('.modal-body').append(body)
-    }
+  if (nombre == "sin recetas disponibles") {
+    $('#delete').hide()
+    $('#pasos').hide()
+    $('#ingredientes').hide()
+    $('.modal-body').text("No hay recetas asociadas a este usuario")
   }
-  ActualRecipe.Receta = nombre
-  ActualRecipe.Instrucciones = desc.join(',')
-  ActualRecipe.Ingredientes = ingredients.join(',')
-  for (i in ingredients) {
-    let body = document.createElement('li')
-    body.textContent = ingredients[i]
-    $('.modal-ingredients').append(body)
+  else {
+    desc = parseList(desc)
+    ingredients = parseList(ingredients)
+    for (i in desc) {
+      if (desc[i] != '**') {
+        let body = document.createElement('li')
+        body.textContent = desc[i]
+        $('.modal-body').append(body)
+      }
+    }
+    ActualRecipe.Receta = nombre
+    ActualRecipe.Instrucciones = desc.join(',')
+    ActualRecipe.Ingredientes = ingredients.join(',')
+    for (i in ingredients) {
+      let body = document.createElement('li')
+      body.textContent = ingredients[i]
+      $('.modal-ingredients').append(body)
+    }
   }
 }
 
@@ -62,20 +70,46 @@ function unload() {
 // let url = "http://localhost:8000/"
 let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/"
 
-let send = document.getElementById('send')
-send.addEventListener('click', async () => {
-  let resp = await fetch(url + "user/save/", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-      "X-csrftoken": token
-    },
-    body: JSON.stringify(ActualRecipe)
+let send, rm
+
+try {
+  send = document.getElementById('send')
+  send.addEventListener('click', async () => {
+    let resp = await fetch(url + "user/save/", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        "X-csrftoken": token
+      },
+      body: JSON.stringify(ActualRecipe)
+    })
+    if (resp.ok) {
+      dialog.close()
+    }
+    else {
+      alert("No se ha podido guardar en el historial")
+    }
   })
-  if (resp.ok) {
-    dialog.close()
-  }
-  else {
-    alert("No se ha podido guardar en el historial")
-  }
-})
+}
+catch (e) {
+  rm = document.getElementById('delete')
+  rm.addEventListener('click', async () => {
+    let resp = await fetch(url + "user/delete/", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        "X-csrftoken": token
+      },
+      body: JSON.stringify({
+        'nombre': nombre
+      })
+    })
+    if (resp.ok) {
+      window.location.reload()
+    }
+    else {
+      alert("No se ha podido eliminar de tu historial")
+    }
+  })
+}
+

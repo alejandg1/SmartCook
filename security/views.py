@@ -44,6 +44,7 @@ class EditView(LoginRequiredMixin, UpdateView):
 
 class LoginView(LoginView):
     template_name = 'forms.html'
+    success_url = reverse_lazy('smartcook:index')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:

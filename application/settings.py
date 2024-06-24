@@ -15,6 +15,8 @@ ALLOWED_HOSTS = ['*']
 
 ALLOWED_ORIGINS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['*']
+
 INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',

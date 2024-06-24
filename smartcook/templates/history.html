@@ -12,10 +12,10 @@
   />
 {% endblock %}
 {% block content %}
-  <div class="historial shadow">
-    <input type="hidden" id="token" value="">
+  <input type="hidden" id="token" value="">
+  <div class="container historial shadow">
     <h2>Historial</h2>
-    <div class="historial-options">
+    <div class=" row-sm historial-options">
       {% for receta in recetas %}
         {% include 'components/list_item.html' with bn='modal' ingredients=receta.ingredientes nombre=receta.nombre desc=receta.pasos %}
       {% endfor %}

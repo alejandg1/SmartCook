@@ -6,7 +6,7 @@ let ActualRecipe = {
 let nombre
 let desc
 let ingredients
-let token = document.getElementById("token").value 
+let token = document.getElementById("token").value
 document.getElementsByName('modal').forEach(function(e) {
   e.addEventListener('click', function() {
     nombre = e.getAttribute('data-name')
@@ -32,14 +32,17 @@ function parseList(list) {
 }
 
 function modal() {
+  $('.modal-ingredients').empty()
   dialog.showModal()
   $('.modal-title').text(nombre)
   desc = parseList(desc)
   ingredients = parseList(ingredients)
   for (i in desc) {
-    let body = document.createElement('li')
-    body.textContent = desc[i]
-    $('.modal-body').append(body)
+    if (desc[i] != '**') {
+      let body = document.createElement('li')
+      body.textContent = desc[i]
+      $('.modal-body').append(body)
+    }
   }
   ActualRecipe.Receta = nombre
   ActualRecipe.Instrucciones = desc.join(',')

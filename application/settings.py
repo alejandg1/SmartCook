@@ -10,7 +10,9 @@ SECRET_KEY = 'django-insecure-)pts(%0!ibqd^-h5m6+d*-53bdixr)izrf28i20+0+to3+0o=e
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['*', 'smartcook.up.railway.app']
+ALLOWED_HOSTS = ['*']
+
+ALLOWED_ORIGINS = ['https://smartcook.up.railway.app', 'http://localhost:8000']
 
 INSTALLED_APPS = [
     'crispy_forms',
@@ -91,9 +93,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 

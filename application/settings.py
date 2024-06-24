@@ -7,11 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)pts(%0!ibqd^-h5m6+d*-53bdixr)izrf28i20+0+to3+0o=e'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'smartcook.up.railway.app']
 
 INSTALLED_APPS = [
     'crispy_forms',

@@ -1,3 +1,6 @@
+require('dotenv').config()
+let url = process.env.URL
+
 function drawImage(canvas, img, width, height) {
   let context = canvas.getContext("2d");
   canvas.width = width;
@@ -33,8 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     img = foto
   })
   document.getElementById("savePht").addEventListener("click", async () => {
-    //let url = "http://localhost:8000/"
-    let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/"
     if (img === undefined || img === "") {
       alert("No se ha tomado la foto")
       return

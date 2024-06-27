@@ -94,7 +94,6 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         with open(imgPath+'image.jpg', 'rb') as f:
             img = base64.b64encode(f.read()).decode('utf-8')
         context['img'] = img
-
         recipes = []
         resp = functions.GPT()
         with open(imgPath+'response.json', 'w') as f:
@@ -119,9 +118,9 @@ def PostImage(request):
     try:
         if request.method == 'POST':
             image = json.loads(request.body)
-            functions.saveImg(image['image'])
+            functions.saveImg(image)
             functions.compress()
-            request.session['image'] = image['image']
+            request.session['image'] = image
             return HttpResponse(status=200)
     except Exception as e:
         print(e)

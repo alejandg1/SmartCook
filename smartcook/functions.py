@@ -87,10 +87,13 @@ def compress():
         if os.path.exists(directory+'compressed.jpg'):
             os.remove(directory+'compressed.jpg')
         image = Image.open(directory+'image.jpg')
+        if image.mode == "RGBA":
+            image = image.convert("RGB")
         quality = 40
         image.save(directory+'compressed.jpg', quality=quality)
         return True
     except Exception as e:
+        print("compress error")
         print(e)
         return None
 

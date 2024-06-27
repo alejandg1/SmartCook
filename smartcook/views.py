@@ -94,18 +94,15 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         with open(imgPath+'image.jpg', 'rb') as f:
             img = base64.b64encode(f.read()).decode('utf-8')
         context['img'] = img
-
         recipes = []
-        with open('smartcook/../response.json', 'r') as f:
-            resp = json.load(f)
         resp = functions.GPT()
-        # with open(imgPath+'response.json', 'w') as f:
-        #     json.dump(resp, f)
+        with open(imgPath+'response.json', 'w') as f:
+            json.dump(resp, f)
         with open('smartcook/../response.json', 'r') as f:
             resp = json.load(f)
         resp = functions.parse_resp(resp)
-        print(resp)
-
+        with open('smartcook/parsed.json', 'w') as f:
+            json.dump(resp, f)
         for i in resp['recipes']:
             rec = functions.Recipe(
                 i['nombre'], i['pasos'])
@@ -121,9 +118,9 @@ def PostImage(request):
     try:
         if request.method == 'POST':
             image = json.loads(request.body)
-            functions.saveImg(image['image'])
+            functions.saveImg(image)
             functions.compress()
-            request.session['image'] = image['image']
+            request.session['image'] = image
             return HttpResponse(status=200)
     except Exception as e:
         print(e)

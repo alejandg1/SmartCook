@@ -1,3 +1,5 @@
+require('dotenv').config()
+let url = process.env.URL
 let ActualRecipe = {
   'Receta': "",
   'Instrucciones': "",
@@ -67,9 +69,6 @@ function unload() {
   $('.modal-body').empty();
 
 }
-// let url = "http://localhost:8000/"
-let url = "https://qpqcn6vw-8000.use2.devtunnels.ms/"
-
 let send, rm
 
 try {

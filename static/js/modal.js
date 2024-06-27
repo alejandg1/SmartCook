@@ -1,4 +1,5 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 let url = process.env.URL
 let ActualRecipe = {
   'Receta': "",

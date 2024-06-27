@@ -1,6 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
-let url = process.env.URL
+let url = "https://smartcook.up.railway.app"
 let ActualRecipe = {
   'Receta': "",
   'Instrucciones': "",

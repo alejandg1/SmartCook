@@ -1,6 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
-let url = process.env.URL
+let url = "https://smartcook.up.railway.app"
 
 function drawImage(canvas, img, width, height) {
   let context = canvas.getContext("2d");

@@ -71,6 +71,8 @@ def parse_resp(resp):
 
 def saveImg(image64):
     try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
         if os.path.exists(directory+'image.jpg'):
             os.remove(directory+'image.jpg')
         image = base64.b64decode(image64)

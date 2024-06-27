@@ -96,16 +96,14 @@ class RecognitionView(LoginRequiredMixin, TemplateView):
         context['img'] = img
 
         recipes = []
-        with open('smartcook/../response.json', 'r') as f:
-            resp = json.load(f)
         resp = functions.GPT()
-        # with open(imgPath+'response.json', 'w') as f:
-        #     json.dump(resp, f)
+        with open(imgPath+'response.json', 'w') as f:
+            json.dump(resp, f)
         with open('smartcook/../response.json', 'r') as f:
             resp = json.load(f)
         resp = functions.parse_resp(resp)
-        print(resp)
-
+        with open('smartcook/parsed.json', 'w') as f:
+            json.dump(resp, f)
         for i in resp['recipes']:
             rec = functions.Recipe(
                 i['nombre'], i['pasos'])

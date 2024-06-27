@@ -16,47 +16,48 @@ def parse_resp(resp):
             "ingredients": [],
             "recipes": []
         }
-        recetas = data.split('### Recetas')[1].split('*Nombre:*')
+        recetas = data.split('### recetas')[1].split('*nombre:*')
         fix_list = [i for i in recetas if i !=
-                    "" and i != " " and i and i != '\n\n']
+                    "" and i != " " and i and i != '\n\n' and i != '\n']
         recetas = fix_list
-        for receta in recetas:
-            if receta == '':
-                continue
-            titulo = data.split(
-                '*Ingredientes:*')[0].split('*Nombre:*')[1]
-            titulo = re.sub(r'#', '', titulo)
-            titulo = re.sub(r'\d', '', titulo)
-            titulo = re.sub(r'\.', '', titulo)
 
-            ingredientes = receta.split('*Ingredientes:*')[0]
+        detected = data.split('\n\n')[0]
+        detected = re.sub(r'- ', '', detected)
+        detected = re.sub(r'### ingredientes', '', detected)
+        detected = re.sub(r'\d. ', '', detected)
+        detected = detected.split('\n')
+        fix_list = [i for i in detected if i != "" and i !=
+                    " " and i and i != '*ingredientes*'
+                    and i != '*ingredientes*']
+        detected = fix_list
+        for receta in recetas:
+            nombre = receta.split('*ingredientes:*')[0]
+            nombre = re.sub(r'#', '', nombre)
+            nombre = re.sub(r'\.', '', nombre)
+            nombre = re.sub(r'\n', '', nombre)
+
+            ingredientes = receta.split(
+                '*ingredientes:*')[1].split('*pasos:*')[0]
             ingredientes = re.sub(r'- ', '', ingredientes)
             ingredientes = ingredientes.split('\n')
             fix_list = [i for i in ingredientes if i !=
-                        "" and i != " " and i and '#' not in i and '*' not in i]
+                        "" and i != " " and i
+                        and '#' not in i and '*' not in i]
             ingredientes = fix_list
 
-            pasos = receta.split('*Pasos:*')[1]
+            pasos = receta.split('*pasos:*')[1]
             pasos = re.sub(r'\d. ', '', pasos)
+            pasos = re.sub(r'-. ', '', pasos)
             pasos = pasos.split('\n')
             fix_list = [i for i in pasos if i !=
-                        "" and i != " " and i and i != '**']
+                        "" and i != " " and i and i != '**'
+                        and i != '-.']
             pasos = fix_list
-            print(pasos)
-
-            detected = data.split('\n\n')[0]
-            detected = re.sub(r'- ', '', detected)
-            detected = re.sub(r'### Ingredientes', '', detected)
-            detected = re.sub(r'\d. ', '', detected)
-            detected = detected.split('\n')
-            fix_list = [i for i in detected if i != "" and i !=
-                        " " and i and i != '*Ingredientes*' and i != '*ingredientes*']
-            detected = fix_list
 
             json_resp['ingredients'] = detected
             json_resp['recipes'].append(
                 {
-                    "nombre": titulo,
+                    "nombre": nombre,
                     "ingredientes": ingredientes,
                     "pasos": pasos
                 }
@@ -111,7 +112,28 @@ def GPT():
     path = directory+'compressed.jpg'
     with open(path, 'rb') as f:
         img = base64.b64encode(f.read()).decode('utf-8')
-    prompt = 'Eres un ayudante de cocina, detecta y lista, los ingredientes de cocina que encuentras en la imagen,no listes ingredientes que no sean plenamente reconocidos, no generes ingredientes que no estén en la imagen,luego lista recetas que se puedan preparar con los ingredientes detectados, cada receta debe tener su nombre, ingredientes y pasos de preparación, las cabeceras deben ser: ingredientes,recetas,nombre,pasos, solo el encabezado recetas y el encabezado ingredientes deben estar como H3, las partes de cada receta deben marcarse de esta forma: *nombre*, el resto del texto debe ser texto corriente'
+    prompt = '''
+            Detecta y lista los ingredientes de cocina que encuentras en la
+            imagen, no listes ingredientes que no sean plenamente reconocidos,
+            no generes ingredientes que no estén en la imagen,luego lista
+            recetas que se puedan preparar con los ingredientes detectados,
+            no generes texto que vaya a exceder los 300 tokens.
+            La respuesta debe tener siempre el siguiente formato, no cambies
+            el como están escritos los encabezados ni los separadores,
+            no hagas cambios de ningun tipo en el formato:
+            ### ingredientes
+            - ingrediente 1
+            - ingrediente 2
+            - ingrediente n
+            ### recetas
+            *nombre:* Nombre de la receta
+            *ingredientes:*
+            - ingrediente 1
+            - ingrediente n
+            *pasos:*
+            -. paso 1
+            -. paso n
+    '''
     key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
     headers = {
         "Content-Type": "application/json",
@@ -137,7 +159,7 @@ def GPT():
             }
         ],
         "temperature": 0.3,
-        "max_tokens": 200
+        "max_tokens": 300
     }
     resp = requests.post(
         "https://api.openai.com/v1/chat/completions",

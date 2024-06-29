@@ -1,4 +1,4 @@
-let url = "https://smartcook.up.railway.app"
+let url = "https://proyecto_const_softw.railway.internal"
 function drawImage(canvas, img, width, height) {
   let context = canvas.getContext("2d");
   canvas.width = width;

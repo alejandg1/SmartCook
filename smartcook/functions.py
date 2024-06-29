@@ -10,34 +10,43 @@ directory = 'smartcook/media/'
 
 
 def parse_resp(resp):
+    patternIng = r'##?###?\ [Ii]ngredientes'
+    patternRec = r'##?###?\ [Rr]ecetas'
+    laberName = r'\*{1,2}[Nn]ombre:\*{1,2}'
+    labelIng = r'\*{1,2}[Ii]ngredientes:\*{1,2}'
+    labelPasos = r'\*{1,2}[Pp]asos:\*{1,2}'
     try:
         data = resp['choices'][0]['message']['content']
+        HeadIng = re.search(patternIng, data).group(0)
+        HeadRec = re.search(patternRec, data).group(0)
+        LabelName = re.search(laberName, data).group(0)
+        LabelIng = re.search(labelIng, data).group(0)
+        LabelPasos = re.search(labelPasos, data).group(0)
         json_resp = {
             "ingredients": [],
             "recipes": []
         }
-        recetas = data.split('### recetas')[1].split('*nombre:*')
+        recetas = data.split(HeadRec)[1].split(LabelName)
         fix_list = [i for i in recetas if i !=
                     "" and i != " " and i and i != '\n\n' and i != '\n']
         recetas = fix_list
 
         detected = data.split('\n\n')[0]
         detected = re.sub(r'- ', '', detected)
-        detected = re.sub(r'### ingredientes', '', detected)
+        detected = re.sub(HeadIng, '', detected)
         detected = re.sub(r'\d. ', '', detected)
         detected = detected.split('\n')
         fix_list = [i for i in detected if i != "" and i !=
-                    " " and i and i != '*ingredientes*'
-                    and i != '*ingredientes*']
+                    " " and i and i != LabelIng]
         detected = fix_list
         for receta in recetas:
-            nombre = receta.split('*ingredientes:*')[0]
+            nombre = receta.split(LabelIng)[0]
             nombre = re.sub(r'#', '', nombre)
             nombre = re.sub(r'\.', '', nombre)
             nombre = re.sub(r'\n', '', nombre)
 
             ingredientes = receta.split(
-                '*ingredientes:*')[1].split('*pasos:*')[0]
+                LabelIng)[1].split(LabelPasos)[0]
             ingredientes = re.sub(r'- ', '', ingredientes)
             ingredientes = ingredientes.split('\n')
             fix_list = [i for i in ingredientes if i !=
@@ -45,7 +54,7 @@ def parse_resp(resp):
                         and '#' not in i and '*' not in i]
             ingredientes = fix_list
 
-            pasos = receta.split('*pasos:*')[1]
+            pasos = receta.split(LabelPasos)[1]
             pasos = re.sub(r'\d. ', '', pasos)
             pasos = re.sub(r'-. ', '', pasos)
             pasos = pasos.split('\n')
@@ -62,6 +71,7 @@ def parse_resp(resp):
                     "pasos": pasos
                 }
             )
+        print(json_resp)
         return json_resp
     except Exception as e:
         print("error")

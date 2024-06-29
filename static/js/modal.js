@@ -1,4 +1,4 @@
-let url = "https://proyecto_const_softw.railway.internal/"
+let url = "https://smartcook.up.railway.app/"
 let ActualRecipe = {
   'Receta': "",
   'Instrucciones': "",

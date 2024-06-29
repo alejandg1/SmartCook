@@ -1,4 +1,6 @@
 venv/
+media/
+response_parsed.json
 node_modules/
 package-lock.json
 .env

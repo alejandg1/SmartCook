@@ -5,6 +5,8 @@ from django.template.loader import get_template
 import os
 import base64
 from PIL import Image
+from dotenv import load_dotenv
+load_dotenv()
 
 directory = 'smartcook/media/'
 
@@ -149,7 +151,8 @@ def GPT():
             -. paso 1
             -. paso n
     '''
-    key = 'sk-proj-7YahWZVoc8lPw6VivwEnT3BlbkFJeUtCp4Kv6QcdsKqhh5ot'
+    key = os.getenv('API_KEY')
+    print(key)
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {key}"
@@ -183,7 +186,6 @@ def GPT():
     with open('response.json', 'w') as f:
         json.dump(resp.json(), f)
     data = parse_resp(resp.json())
-    print(data)
     return data
 
 

@@ -11,7 +11,4 @@ canvas{
 .Container_recetas{
     max-width: 300px; 
     margin: auto; 
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
 }

@@ -1,3 +1,3 @@
-# SmartCook
+# SmartCook: Recetario con IA
 
 

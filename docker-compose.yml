@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  web:
+    build: .
+    container_name: smartcook_web
+    command: gunicorn application.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=application.settings
+      - DATABASE_NAME=smartcook_db
+      - DATABASE_USER=smartcook_user
+      - DATABASE_PASSWORD=smartcook_passw
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+  db:
+    image: postgres:16
+    container_name: smartcook_db
+    restart: always
+    environment:
+      POSTGRES_DB: smartcook_db
+      POSTGRES_USER: smartcook_user
+      POSTGRES_PASSWORD: smartcook_passe
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:services:
+  smartcook:
+
+  database:

@@ -1,4 +1,4 @@
-# SmartCook: Recetario con IA
+# SmartCook - Tu aplicativo web de recetario con IA
 
 ## Descripción del Proyecto
 SmartCook es una aplicación web que facilita la planificación de comidas en casa, utilizando inteligencia artificial para analizar el contenido del refrigerador a partir de una fotografía. A partir de los ingredientes identificados, sugiere recetas que se pueden preparar aprovechando lo que ya tienes disponible, ayudando así a reducir el desperdicio de alimentos y simplificar el proceso de cocinar en casa.

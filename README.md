@@ -1,3 +1,3 @@
-# SmartCook: Recetario con IA
+# SmartCook - Tu aplicativo web de recetario con IA
 
 

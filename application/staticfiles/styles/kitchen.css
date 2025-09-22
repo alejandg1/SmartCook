@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+p {
+  margin-top: 20px;
+}
+
+.but-cont button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #326c72;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.but-cont a {
+  color: rgb(255, 255, 255);
+}
+
+.form-canvas-container {
+  display: flex;
+  flex-direction: row; 
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form-column, .canvas-column {
+  flex: 2; 
+  margin: 10px;
+}
+
+.canvas-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 310px;
+  height: 310px;
+}
+
+@media (max-width: 768px) {
+  .form-canvas-container {
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  .form-column, .canvas-column {
+    flex: 1 0 100%; 
+    margin: 5px 0;
+  }
+
+  .canvas-column {
+    justify-content: center; 
+  }
+}

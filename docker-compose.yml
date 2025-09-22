@@ -1,20 +1,19 @@
-version: '3.9'
 services:
   web:
     build: .
     container_name: smartcook_web
-    command: gunicorn application.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DJANGO_SETTINGS_MODULE=application.settings
       - DATABASE_NAME=smartcook_db
       - DATABASE_USER=smartcook_user
-      - DATABASE_PASSWORD=smartcook_passw
+      - DATABASE_PASSWORD=smartcook_pass
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
   db:
@@ -24,13 +23,15 @@ services:
     environment:
       POSTGRES_DB: smartcook_db
       POSTGRES_USER: smartcook_user
-      POSTGRES_PASSWORD: smartcook_passe
+      POSTGRES_PASSWORD: smartcook_pass
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smartcook_user -d smartcook_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
-  postgres_data:services:
-  smartcook:
-
-  database:
+  postgres_data:

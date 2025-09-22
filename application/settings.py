@@ -67,12 +67,12 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "NsjwfSaNFMhnGujSasDFCwwkqKfrsMDs",
-        "HOST": "roundhouse.proxy.rlwy.net",
-        "PORT": "20120"
+    "ENGINE": "django.db.backends.postgresql",
+    "NAME": os.environ.get("DATABASE_NAME", "smartcook_db"),
+    "USER": os.environ.get("DATABASE_USER", "smartcook_user"),
+    "PASSWORD": os.environ.get("DATABASE_PASSWORD", "smartcook_pass"),
+    "HOST": os.environ.get("DATABASE_HOST", "db"),
+    "PORT": os.environ.get("DATABASE_PORT", "5432")
     }
 }
 
